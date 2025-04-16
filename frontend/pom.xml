@@ -3,7 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>frontend</artifactId>
+    <groupId>com.art</groupId>
+    <artifactId>drink-gpt-frontend</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <build>
@@ -19,8 +21,8 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>v18.18.2</nodeVersion>
-                            <npmVersion>9.8.1</npmVersion>
+                            <nodeVersion>v22.14.0</nodeVersion>
+                            <npmVersion>10.9.2</npmVersion>
                         </configuration>
                     </execution>
                     <execution>
