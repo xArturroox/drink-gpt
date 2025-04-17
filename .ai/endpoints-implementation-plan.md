@@ -1,4 +1,3 @@
-# API Endpoint Implementation Plan: Ingredients Endpoints
 
 ## Endpoint: GET /api/ingredients
 
@@ -211,8 +210,6 @@ Operacja usuwa pojedynczy rekord; kluczowe jest prawidłowe indeksowanie.
 3. Obsługa wyjątków i testowanie.
 
 ---
-
-# API Endpoint Implementation Plan: Drinks Endpoints
 
 ## Endpoint: GET /api/drinks
 
@@ -431,8 +428,6 @@ Bezpośrednie usunięcie pojedynczego rekordu; ważne jest indeksowanie identyfi
 
 ---
 
-# API Endpoint Implementation Plan: Orders Endpoints
-
 ## Endpoint: GET /api/orders
 
 ### 1. Przegląd punktu końcowego
@@ -599,8 +594,6 @@ Operacja usuwa pojedynczy rekord; wysoka wydajność przy prawidłowym indeksowa
 3. Testy funkcjonalne.
 
 ---
-
-# API Endpoint Implementation Plan: AI-Driven Drink Suggestion Endpoint
 
 ## Endpoint: POST /api/ai/suggestion
 
