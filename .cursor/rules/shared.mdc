@@ -29,21 +29,26 @@ Backend:
 When introducing changes to the project, always follow the directory structure below:
 
 Frontend:
-- `./src` - source code
-- `./src/layouts` - Astro layouts
-- `./src/pages` - Astro pages
-- `./src/middleware/index.ts` - Astro middleware
-- `./src/types.ts` - Shared types forfrontend (DTOs)
-- `./src/components` - Client-side components written in Astro (static) and React (dynamic)
-- `./src/components/ui` - Client-side components from Shadcn/ui
-- `./src/lib` - Services and helpers 
-- `./src/assets` - static internal assets
+- `./frontend/src` - source code
+- `./frontend/src/layouts` - Astro layouts
+- `./frontend/src/pages` - Astro pages
+- `./frontend/src/middleware/index.ts` - Astro middleware
+- `./frontend/src/types.ts` - Shared types for frontend (DTOs)
+- `./frontend/src/components` - Client-side components written in Astro (static) and React (dynamic)
+- `./frontend/src/components/ui` - Client-side components from Shadcn/ui
+- `./frontend/src/lib` - Services and helpers
+- `./frontend/src/assets` - static internal assets
 - `./public` - public assets
 
 Backend:
-- `./src/main/java` - source code
-- `./src/main/resources` - resources for source code
-- `./src/main/test` - tests
+- `./backend/src/main/java/com/art/drinkgpt` - source code
+- `./backend/src/main/java/com/art/drinkgpt/controllers` - place to store API endpoints
+- `./backend/src/main/java/com/art/drinkgpt/models/dto` - place to store DTO used in API endpoints
+- `./backend/src/main/java/com/art/drinkgpt/models/entities` - place to store JPA Entities
+- `./backend/src/main/java/com/art/drinkgpt/services` - place to store spring boot services
+- `./backend/src/main/resources` - resources for source code
+- `./backend/src/main/resources/db/migration` - flyway migration
+- `./backend/src/main/test/java/com/art/drinkgpt` - tests
 
 When modifying the directory structure, always update this section.
 

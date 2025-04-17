@@ -1,6 +1,6 @@
 ---
 description: 
-globs: backend\src\main\resources\**
+globs: backend/src/main/resources/db/migration/**
 alwaysApply: false
 ---
 # Database: Create migration
