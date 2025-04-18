@@ -7,8 +7,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,7 +23,7 @@ public class IngredientController {
     }
 
     @GetMapping("/{id}")
-    public IngredientDTO getIngredientById(@PathVariable Long id) {
+    public IngredientDTO getIngredientById(@PathVariable Integer id) {
         return ingredientService.getIngredientById(id);
     }
 
@@ -35,14 +33,14 @@ public class IngredientController {
     }
 
     @PatchMapping("/{id}")
-    public IngredientDTO updateIngredient(@PathVariable Long id,
+    public IngredientDTO updateIngredient(@PathVariable Integer id,
                                           @Valid @RequestBody IngredientRequestDTO request) {
 
         return ingredientService.updateIngredient(id, request);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteIngredient(@PathVariable Long id) {
+    public void deleteIngredient(@PathVariable Integer id) {
         ingredientService.deleteIngredient(id);
     }
 }

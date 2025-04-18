@@ -15,7 +15,7 @@ create table ingredients (
 create table drink_ingredients (
   drink_id int not null,
   ingredient_id int not null,
-  quantity decimal not null,
+  quantity float not null,
   unit varchar(50) not null,
   primary key (drink_id, ingredient_id),
   foreign key (drink_id) references drinks(id),

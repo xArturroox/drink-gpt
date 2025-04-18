@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -95,13 +96,13 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     private DrinkDTO mapToDTO(Drink drink) {
-        Set<DrinkIngredientDTO> ingredients = drink.getDrinkIngredients().stream()
+        List<DrinkIngredientDTO> ingredients = drink.getDrinkIngredients().stream()
                 .map(di -> new DrinkIngredientDTO(
                         new IngredientDTO(di.getIngredient().getId(), di.getIngredient().getName(), di.getIngredient().getAvailable()),
                         di.getQuantity(),
                         di.getUnit()
                 ))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
         return new DrinkDTO(
                 drink.getId(),

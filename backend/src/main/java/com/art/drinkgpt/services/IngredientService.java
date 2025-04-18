@@ -7,8 +7,11 @@ import org.springframework.data.domain.Pageable;
 
 public interface IngredientService {
     Page<IngredientDTO> getAllIngredients(Pageable pageable, Boolean available);
-    IngredientDTO getIngredientById(Long id);
+
+    IngredientDTO getIngredientById(Integer id);
     IngredientDTO createIngredient(IngredientRequestDTO request);
-    IngredientDTO updateIngredient(Long id, IngredientRequestDTO request);
-    void deleteIngredient(Long id);
+
+    IngredientDTO updateIngredient(Integer id, IngredientRequestDTO request);
+
+    void deleteIngredient(Integer id);
 } 

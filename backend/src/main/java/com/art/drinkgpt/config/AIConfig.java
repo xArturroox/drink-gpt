@@ -1,7 +1,6 @@
 package com.art.drinkgpt.config;
 
-import org.springframework.ai.openai.OpenAiChatClient;
-import org.springframework.ai.openai.api.OpenAiApi;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AIConfig {
 
     @Bean
-    public OpenAiChatClient openAiChatClient(OpenAiApi openAiApi) {
-        return new OpenAiChatClient(openAiApi);
+    public ChatClient openAiChatClient(ChatClient.Builder chatClientBuilder) {
+        return chatClientBuilder.build();
     }
 } 

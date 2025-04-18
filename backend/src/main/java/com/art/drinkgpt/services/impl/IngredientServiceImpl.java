@@ -32,7 +32,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     @Transactional(readOnly = true)
-    public IngredientDTO getIngredientById(Long id) {
+    public IngredientDTO getIngredientById(Integer id) {
         log.debug("Getting ingredient by id: {}", id);
         return ingredientRepository.findById(id)
                 .map(this::mapToDTO)
@@ -50,7 +50,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     @Transactional
-    public IngredientDTO updateIngredient(Long id, IngredientRequestDTO request) {
+    public IngredientDTO updateIngredient(Integer id, IngredientRequestDTO request) {
         log.debug("Updating ingredient with id: {} and request: {}", id, request);
         Ingredient ingredient = ingredientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ingredient not found with id: " + id));
@@ -60,7 +60,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     @Transactional
-    public void deleteIngredient(Long id) {
+    public void deleteIngredient(Integer id) {
         log.debug("Deleting ingredient with id: {}", id);
         if (!ingredientRepository.existsById(id)) {
             throw new EntityNotFoundException("Ingredient not found with id: " + id);
