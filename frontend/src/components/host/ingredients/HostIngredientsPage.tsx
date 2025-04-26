@@ -1,0 +1,89 @@
+import React, { useEffect, useState } from "react";
+import useIngredients from "@/lib/hooks/useIngredients";
+import useConfirmationDialog from "@/lib/hooks/useConfirmationDialog";
+import IngredientListToolbar from "./IngredientListToolbar.tsx";
+import IngredientList from "./IngredientList.tsx";
+import IngredientModalForm from "./IngredientModalForm.tsx";
+import ConfirmationDialog from "./ConfirmationDialog.tsx";
+import type { IngredientDTO, IngredientRequestDTO } from "@/types";
+
+const HostIngredientsPage: React.FC = () => {
+  const { ingredients, loading, error, createIngredient, updateIngredient, deleteIngredient } = useIngredients();
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<IngredientDTO | null>(null);
+  const { isOpen: isConfirmOpen, targetId, open: openConfirm, close: closeConfirm } = useConfirmationDialog();
+
+  const handleAddClick = () => {
+    setEditingItem(null);
+    setModalOpen(true);
+  };
+
+  const handleEditClick = (item: IngredientDTO) => {
+    setEditingItem(item);
+    setModalOpen(true);
+  };
+
+  const handleDeleteClick = (id: number) => {
+    openConfirm(id.toString());
+  };
+
+  const handleModalSubmit = async (data: IngredientRequestDTO) => {
+    if (editingItem) {
+      await updateIngredient(editingItem.id, data);
+      setSuccessMessage("Składnik został zaktualizowany");
+    } else {
+      await createIngredient(data);
+      setSuccessMessage("Składnik został dodany");
+    }
+    setModalOpen(false);
+  };
+
+  const handleModalCancel = () => {
+    setModalOpen(false);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (targetId) {
+      await deleteIngredient(Number(targetId));
+      setSuccessMessage("Składnik został usunięty");
+    }
+    closeConfirm();
+  };
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => setSuccessMessage(""), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
+
+  return (
+    <div className="p-4">
+      {successMessage && (
+        <div role="status" className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow">
+          {successMessage}
+        </div>
+      )}
+      {error && <div className="text-destructive mb-4">{error.message}</div>}
+      {loading && (
+        <div role="status" className="flex items-center mb-4 text-gray-600">
+          <span>Ładowanie składników...</span>
+        </div>
+      )}
+      <h1 className="text-2xl font-semibold mb-4">Zarządzanie Składnikami</h1>
+      <IngredientListToolbar onAddClick={handleAddClick} />
+      <IngredientList items={ingredients} onEdit={handleEditClick} onDelete={handleDeleteClick} />
+      {isModalOpen && (
+        <IngredientModalForm
+          initialValues={editingItem ? { name: editingItem.name, available: editingItem.available } : undefined}
+          onSubmit={handleModalSubmit}
+          onCancel={handleModalCancel}
+        />
+      )}
+      <ConfirmationDialog isOpen={isConfirmOpen} onConfirm={handleDeleteConfirm} onCancel={closeConfirm} />
+    </div>
+  );
+};
+
+export default HostIngredientsPage; 
