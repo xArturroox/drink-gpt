@@ -74,7 +74,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <TopBar isAuthenticated={false} onLoginClick={() => {
+      <TopBar isAuthenticated={true} onLoginClick={() => {
       }} />
       <main className="flex-grow container mx-auto p-4 space-y-8">
         <DrinksList drinks={drinks} onSelect={handleSelectDrink} />

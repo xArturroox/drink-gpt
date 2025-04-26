@@ -18,4 +18,4 @@ const DrinkList: React.FC<DrinkListProps> = ({ drinks, onEdit, onDelete }) => {
   );
 };
 
-export default DrinkList; 
+export default DrinkList;

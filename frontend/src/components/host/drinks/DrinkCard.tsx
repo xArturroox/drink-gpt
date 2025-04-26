@@ -30,4 +30,4 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onEdit, onDelete }) => {
   );
 };
 
-export default DrinkCard; 
+export default DrinkCard;

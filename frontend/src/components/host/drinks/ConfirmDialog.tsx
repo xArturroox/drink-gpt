@@ -46,4 +46,4 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({ isOpen, message, onConfir
   );
 };
 
-export default ConfirmDialog; 
+export default ConfirmDialog;

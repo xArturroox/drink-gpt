@@ -10,8 +10,11 @@ interface PreferenceInputProps {
 const PreferenceInput: React.FC<PreferenceInputProps> = ({ value, placeholder, error, onChange }) => {
   return (
     <div className="mb-4">
-      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Preferencje</label>
+      <label htmlFor="preferences" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        Preferencje
+      </label>
       <input
+        id="preferences"
         type="text"
         className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
         value={value}

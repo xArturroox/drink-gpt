@@ -34,9 +34,7 @@ const IngredientModalForm: React.FC<IngredientModalFormProps> = ({ initialValues
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
     >
       <div ref={dialogRef} tabIndex={-1} className="bg-white p-6 rounded-md shadow-lg max-w-md w-full">
-        <h2 className="text-lg font-semibold mb-4">
-          {initialValues ? "Edytuj składnik" : "Dodaj składnik"}
-        </h2>
+        <h2 className="text-lg font-semibold mb-4">{initialValues ? "Edytuj składnik" : "Dodaj składnik"}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block font-medium mb-1">
@@ -65,7 +63,9 @@ const IngredientModalForm: React.FC<IngredientModalFormProps> = ({ initialValues
             <Button variant="outline" onClick={onCancel} type="button">
               Anuluj
             </Button>
-            <Button type="submit" disabled={!name.trim()}>Zapisz</Button>
+            <Button type="submit" disabled={!name.trim()}>
+              Zapisz
+            </Button>
           </div>
         </form>
       </div>
@@ -73,4 +73,4 @@ const IngredientModalForm: React.FC<IngredientModalFormProps> = ({ initialValues
   );
 };
 
-export default IngredientModalForm; 
+export default IngredientModalForm;

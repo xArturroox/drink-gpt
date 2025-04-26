@@ -63,8 +63,8 @@ const HostDrinksView: React.FC = () => {
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-semibold">Manage Drinks</h1>
-        <button onClick={handleAddClick} className="btn btn-primary">Add Drink</button>
+        <h1 className="text-2xl font-semibold">Zarządzanie drinkami</h1>
+        <button onClick={handleAddClick} className="btn btn-primary">Dodaj drink</button>
       </div>
       {isLoading && <p>Loading...</p>}
       {error && <p className="text-red-600">{error}</p>}

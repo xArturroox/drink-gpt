@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import type { ConfirmationDialogProps } from "@/types";
 
 const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({ isOpen, onConfirm, onCancel }) => {
-  const dialogRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -22,13 +22,13 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({ isOpen, onConfi
   }
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
+    <dialog
+      ref={dialogRef}
+      open
       aria-labelledby="delete-dialog-title"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-transparent"
     >
-      <div ref={dialogRef} tabIndex={-1} className="bg-white dark:bg-gray-800 p-6 rounded-md shadow-lg max-w-sm w-full">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-md shadow-lg max-w-sm w-full">
         <h2 id="delete-dialog-title" className="text-lg font-semibold">
           Potwierdź usunięcie
         </h2>
@@ -42,7 +42,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({ isOpen, onConfi
           </Button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 };
 

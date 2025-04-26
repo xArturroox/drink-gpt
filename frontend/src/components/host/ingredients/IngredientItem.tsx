@@ -27,4 +27,4 @@ const IngredientItem: React.FC<IngredientItemProps> = ({ item, onEdit, onDelete 
   </tr>
 );
 
-export default IngredientItem; 
+export default IngredientItem;

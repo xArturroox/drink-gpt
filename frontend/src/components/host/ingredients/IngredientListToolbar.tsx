@@ -11,4 +11,4 @@ const IngredientListToolbar: React.FC<IngredientListToolbarProps> = ({ onAddClic
   </div>
 );
 
-export default IngredientListToolbar; 
+export default IngredientListToolbar;

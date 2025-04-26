@@ -31,4 +31,4 @@ const IngredientList: React.FC<IngredientListProps> = ({ items, onEdit, onDelete
   );
 };
 
-export default IngredientList; 
+export default IngredientList;

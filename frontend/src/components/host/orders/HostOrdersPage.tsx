@@ -40,7 +40,7 @@ const HostOrdersPage: React.FC = () => {
         </div>
       )}
       {loading && (
-        <div role="status" className="flex items-center mb-4 text-gray-600">
+        <output aria-busy="true" aria-live="polite" className="flex items-center mb-4 text-gray-600">
           <svg
             className="animate-spin h-5 w-5 mr-2 text-primary"
             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ const HostOrdersPage: React.FC = () => {
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
           </svg>
           <span>Ładowanie zamówień...</span>
-        </div>
+        </output>
       )}
       <h1 className="text-2xl font-semibold mb-4">Kolejka Zamówień</h1>
       <FilterSortControls filters={filters} onChange={handleFilterChange} disabled={loading} />

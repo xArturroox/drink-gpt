@@ -8,7 +8,7 @@ import type {
   SuggestedDrinkDTO,
 } from "../types";
 
-const API_BASE = process.env.API_BASE_URL || "http://localhost:8080"; // Use an environment variable or default to '' for relative paths
+const API_BASE = "http://localhost:8080"; // Use an environment variable or default to '' for relative paths
 
 // Ingredient API
 export async function fetchIngredients(params?: {

@@ -45,30 +45,17 @@ const IngredientSelector: React.FC<IngredientSelectorProps> = ({ fields, append,
             placeholder="Unit"
             {...register(`ingredients.${index}.unit`, { required: "Unit is required" })}
           />
-          <button
-            type="button"
-            className="text-red-600"
-            onClick={() => remove(index)}
-          >
+          <button type="button" className="text-red-600" onClick={() => remove(index)}>
             &times;
           </button>
         </div>
       ))}
-      <button
-        type="button"
-        className="mt-2 text-blue-600"
-        onClick={() => append({ id: 0, quantity: 1, unit: "" })}
-      >
+      <button type="button" className="mt-2 text-blue-600" onClick={() => append({ id: 0, quantity: 1, unit: "" })}>
         Add Ingredient
       </button>
-      {errors.ingredients && (
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        <p className="text-red-600 mt-1">
-          {(errors.ingredients as any).message || "Select at least one ingredient"}
-        </p>
-      )}
+      <p className="text-red-600 mt-1">{(errors.ingredients as any).message || "Select at least one ingredient"}</p>
     </fieldset>
   );
 };
 
-export default IngredientSelector; 
+export default IngredientSelector;

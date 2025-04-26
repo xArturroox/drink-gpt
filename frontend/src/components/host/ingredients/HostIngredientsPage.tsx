@@ -86,4 +86,4 @@ const HostIngredientsPage: React.FC = () => {
   );
 };
 
-export default HostIngredientsPage; 
+export default HostIngredientsPage;
