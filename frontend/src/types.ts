@@ -64,3 +64,30 @@ export interface AISuggestionViewModel {
   ingredients: string;
   recipe: string;
 }
+
+export interface OrderViewModel {
+  id: string;
+  drinkName: string;
+  ingredients: string;
+  recipe: string;
+  guestName: string;
+  orderTimestamp: string; // formatted date/time
+  served: boolean;
+}
+
+export interface FilterOptions {
+  status?: "pending" | "served";
+  from?: Date;
+  to?: Date;
+}
+
+export interface Pagination {
+  page: number;
+  size: number;
+}
+
+export interface ConfirmationDialogProps {
+  isOpen: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+}

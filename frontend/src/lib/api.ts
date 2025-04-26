@@ -59,10 +59,11 @@ export async function deleteIngredient(id: number): Promise<void> {
 }
 
 // Order API
-export async function fetchOrders(params?: { page?: number; size?: number }): Promise<OrderDTO[]> {
+export async function fetchOrders(params?: { page?: number; size?: number; status?: string }): Promise<OrderDTO[]> {
   const queryParams = new URLSearchParams();
-  if (params?.page) queryParams.append("page", params.page.toString());
-  if (params?.size) queryParams.append("size", params.size.toString());
+  if (params?.page !== undefined) queryParams.append("page", params.page.toString());
+  if (params?.size !== undefined) queryParams.append("size", params.size.toString());
+  if (params?.status) queryParams.append("status", params.status);
   const response = await fetch(`${API_BASE}/api/orders?${queryParams.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch orders");
   return response.json();
