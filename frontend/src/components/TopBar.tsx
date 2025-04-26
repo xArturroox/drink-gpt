@@ -11,7 +11,9 @@ const TopBar: React.FC<TopBarProps> = ({ isAuthenticated, onLoginClick }) => {
     <header className="bg-white dark:bg-gray-900 shadow">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center space-x-8">
-          <h1 className="text-xl font-bold">DrinkGPT</h1>
+          <a href="/" className="hover:opacity-80 transition-opacity cursor-pointer">
+            <h1 className="text-xl font-bold">DrinkGPT</h1>
+          </a>
           {isAuthenticated && (
             <nav className="flex space-x-4">
               <a
