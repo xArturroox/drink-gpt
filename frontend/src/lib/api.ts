@@ -96,7 +96,7 @@ export async function deleteOrder(orderId: number): Promise<void> {
 export async function fetchDrinks(params?: {
   page?: number;
   size?: number;
-  ingredientId?: number
+  ingredientId?: number;
 }): Promise<DrinkDTO[]> {
   const queryParams = new URLSearchParams();
   if (params?.page) queryParams.append("page", params.page.toString());
@@ -149,4 +149,4 @@ export async function suggestDrink(request: AISuggestionRequestDTO): Promise<Sug
   });
   if (!response.ok) throw new Error("Failed to suggest drink");
   return response.json();
-} 
+}

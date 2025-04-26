@@ -47,12 +47,12 @@ npm run build
 ```md
 .
 ├── src/
-│   ├── layouts/    # Astro layouts
-│   ├── pages/      # Astro pages
-│   │   └── api/    # API endpoints
-│   ├── components/ # UI components (Astro & React)
-│   └── assets/     # Static assets
-├── public/         # Public assets
+│ ├── layouts/ # Astro layouts
+│ ├── pages/ # Astro pages
+│ │ └── api/ # API endpoints
+│ ├── components/ # UI components (Astro & React)
+│ └── assets/ # Static assets
+├── public/ # Public assets
 ```
 
 ## AI Development Support
@@ -69,4 +69,3 @@ This project is configured with AI development tools to enhance the development 
 ### Cursor IDE
 
 The project includes AI rules in `.cursor/rules/` directory that help Cursor IDE understand the project structure and provide better code suggestions.
-

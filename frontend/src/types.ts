@@ -49,4 +49,18 @@ export interface OrderRequestDTO {
 
 export interface AISuggestionRequestDTO {
   preferences: string;
-} 
+}
+
+export interface DrinkViewModel {
+  id: number;
+  name: string;
+  ingredients: string; // joined list of ingredients e.g. "Rum:50ml; Limonka:20g"
+  recipe: string;
+}
+
+export interface AISuggestionViewModel {
+  name: string;
+  description: string;
+  ingredients: string;
+  recipe: string;
+}
