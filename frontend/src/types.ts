@@ -91,3 +91,9 @@ export interface ConfirmationDialogProps {
   onConfirm: () => void;
   onCancel: () => void;
 }
+
+export interface DrinkFormValues {
+  name: string;
+  ingredients: { id: number; quantity: number; unit: string }[];
+  recipe: string;
+}
