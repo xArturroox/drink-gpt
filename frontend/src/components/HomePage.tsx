@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TopBar from "./TopBar";
 import DrinksList from "./DrinksList";
 import AISuggestionPanel from "./AISuggestionPanel";
 import SuggestionResultModal from "./SuggestionResultModal";
@@ -74,8 +73,6 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <TopBar isAuthenticated={true} onLoginClick={() => {
-      }} />
       <main className="flex-grow container mx-auto p-4 space-y-8">
         <DrinksList drinks={drinks} onSelect={handleSelectDrink} />
         <AISuggestionPanel onSubmit={handleAISubmit} />
