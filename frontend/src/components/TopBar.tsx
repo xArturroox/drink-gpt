@@ -1,12 +1,10 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "./hooks/useAuth";
 
-interface TopBarProps {
-  isAuthenticated: boolean;
-  onLoginClick: () => void;
-}
+const TopBar = () => {
+  const { isAuthenticated, handleLogin, handleLogout } = useAuth();
 
-const TopBar: React.FC<TopBarProps> = ({ isAuthenticated, onLoginClick }) => {
   return (
     <header className="bg-white dark:bg-gray-900 shadow">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -38,9 +36,13 @@ const TopBar: React.FC<TopBarProps> = ({ isAuthenticated, onLoginClick }) => {
           )}
         </div>
         <Button
-          onClick={onLoginClick}
+          onClick={isAuthenticated ? handleLogout : handleLogin}
           variant={isAuthenticated ? "ghost" : "default"}
-          className={isAuthenticated ? "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white" : ""}
+          className={
+            isAuthenticated
+              ? "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              : ""
+          }
         >
           {isAuthenticated ? "Wyloguj się" : "Zaloguj się"}
         </Button>
