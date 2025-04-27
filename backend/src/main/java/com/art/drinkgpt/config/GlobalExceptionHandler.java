@@ -1,14 +1,18 @@
 package com.art.drinkgpt.config;
 
+import com.art.drinkgpt.models.dto.ErrorResponseDTO;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +66,18 @@ public class GlobalExceptionHandler {
                         HttpStatus.INTERNAL_SERVER_ERROR.value(),
                         "An unexpected error occurred"
                 ));
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponseDTO handleBadCredentials(BadCredentialsException ex) {
+        return ErrorResponseDTO.of("Nieprawidłowy login lub hasło");
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponseDTO handleAccessDenied(AccessDeniedException ex) {
+        return ErrorResponseDTO.of("Brak dostępu do zasobu");
     }
 
     record ErrorResponse(int status, String message, Map<String, String> errors) {
