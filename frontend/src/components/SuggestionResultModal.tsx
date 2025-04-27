@@ -1,29 +1,55 @@
 import React from "react";
 import type { AISuggestionViewModel } from "@/types";
-import { Button } from "@/components/ui/button";
+import { useGuestName } from "./contexts/GuestNameContext";
 
 interface SuggestionResultModalProps {
-  suggestion: AISuggestionViewModel;
+  suggestion: AISuggestionViewModel | null;
   isOpen: boolean;
-  onConfirm: (suggestion: AISuggestionViewModel) => void;
+  onConfirm: (suggestion: AISuggestionViewModel, guestName: string) => void;
   onCancel: () => void;
 }
 
-const SuggestionResultModal: React.FC<SuggestionResultModalProps> = ({ suggestion, isOpen, onConfirm, onCancel }) => {
-  if (!isOpen) return null;
+const SuggestionResultModal: React.FC<SuggestionResultModalProps> = ({
+                                                                       suggestion,
+                                                                       isOpen,
+                                                                       onConfirm,
+                                                                       onCancel,
+                                                                     }) => {
+  const { guestName } = useGuestName();
+
+  if (!isOpen || !suggestion) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-lg">
-        <h2 className="text-xl font-semibold mb-2">{suggestion.name}</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{suggestion.description}</p>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">Składniki: {suggestion.ingredients}</p>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Przepis: {suggestion.recipe}</p>
-        <div className="flex justify-end space-x-2">
-          <Button variant="outline" onClick={onCancel}>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-lg w-full">
+        <h2 className="text-xl font-semibold mb-4">Proponowany drink</h2>
+        <div className="space-y-4">
+          <div>
+            <h3 className="font-semibold">Nazwa:</h3>
+            <p>{suggestion.name}</p>
+          </div>
+          <div>
+            <h3 className="font-semibold">Składniki:</h3>
+            <p>{suggestion.ingredients}</p>
+          </div>
+          <div>
+            <h3 className="font-semibold">Przepis:</h3>
+            <p>{suggestion.recipe}</p>
+          </div>
+        </div>
+        <div className="flex justify-end space-x-4 mt-6">
+          <button
+            onClick={onCancel}
+            className="px-4 py-2 border rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
             Anuluj
-          </Button>
-          <Button onClick={() => onConfirm(suggestion)}>Potwierdź zamówienie</Button>
+          </button>
+          <button
+            onClick={() => onConfirm(suggestion, guestName)}
+            className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark"
+          >
+            Zamów
+          </button>
         </div>
       </div>
     </div>

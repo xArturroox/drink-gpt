@@ -4,14 +4,14 @@ import DrinkCard from "./DrinkCard";
 
 interface DrinksListProps {
   drinks: DrinkViewModel[];
-  onSelect: (drink: DrinkViewModel) => void;
+  onSelect: (drink: DrinkViewModel, guestName: string) => void;
 }
 
 const DrinksList: React.FC<DrinksListProps> = ({ drinks, onSelect }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {drinks.map((drink) => (
-        <DrinkCard key={drink.id} drink={drink} onOrder={onSelect} />
+        <DrinkCard key={drink.name} drink={drink} onOrder={onSelect} />
       ))}
     </div>
   );

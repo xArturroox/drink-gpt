@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PreferenceInput from "@/components/PreferenceInput";
-import GuestNameInput from "@/components/GuestNameInput";
 import { Button } from "@/components/ui/button";
+import { useGuestName } from "./contexts/GuestNameContext";
 
 interface AISuggestionPanelProps {
   onSubmit: (preferences: string, guestName: string) => void;
@@ -10,15 +10,23 @@ interface AISuggestionPanelProps {
 
 const AISuggestionPanel: React.FC<AISuggestionPanelProps> = ({ onSubmit, isLoading = false }) => {
   const [preferences, setPreferences] = useState("");
-  const [guestName, setGuestName] = useState("");
-  const [errors, setErrors] = useState<{ preferences?: string; guestName?: string }>({});
+  const { guestName, setGuestName, error, setError } = useGuestName();
+  const [preferencesError, setPreferencesError] = useState<string | null>(null);
 
   const handleSubmit = () => {
-    const newErrors: typeof errors = {};
-    if (!preferences.trim()) newErrors.preferences = "Preferencje nie mogą być puste.";
-    if (!guestName.trim()) newErrors.guestName = "Imię gościa nie może być puste.";
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length > 0) return;
+    setPreferencesError(null);
+    setError(null);
+
+    if (!preferences.trim()) {
+      setPreferencesError("Preferencje nie mogą być puste.");
+      return;
+    }
+
+    if (!guestName.trim()) {
+      setError("Proszę podać imię gościa przed zamówieniem.");
+      return;
+    }
+
     onSubmit(preferences, guestName);
   };
 
@@ -27,10 +35,19 @@ const AISuggestionPanel: React.FC<AISuggestionPanelProps> = ({ onSubmit, isLoadi
       <PreferenceInput
         value={preferences}
         placeholder="Podaj swoje preferencje"
-        error={errors.preferences}
+        error={preferencesError}
         onChange={setPreferences}
       />
-      <GuestNameInput value={guestName} placeholder="Twoje imię" error={errors.guestName} onChange={setGuestName} />
+      <div className="mt-4">
+        <input
+          type="text"
+          value={guestName}
+          onChange={(e) => setGuestName(e.target.value)}
+          placeholder="Twoje imię"
+          className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
+        />
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      </div>
       <Button className="mt-4" onClick={handleSubmit} disabled={isLoading}>
         {isLoading ? "Proponowanie..." : "Proponuj"}
       </Button>

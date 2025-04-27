@@ -1,13 +1,24 @@
 import React from "react";
 import type { DrinkViewModel } from "@/types";
 import { Button } from "@/components/ui/button";
+import { useGuestName } from "./contexts/GuestNameContext";
 
 interface DrinkCardProps {
   drink: DrinkViewModel;
-  onOrder: (drink: DrinkViewModel) => void;
+  onOrder: (drink: DrinkViewModel, guestName: string) => void;
 }
 
 const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onOrder }) => {
+  const { guestName, error, setError } = useGuestName();
+
+  const handleOrder = () => {
+    if (!guestName.trim()) {
+      setError("Proszę podać imię gościa przed zamówieniem.");
+      return;
+    }
+    onOrder(drink, guestName);
+  };
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col justify-between">
       <div>
@@ -17,7 +28,8 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onOrder }) => {
           {drink.recipe.length > 100 ? `${drink.recipe.substring(0, 100)}...` : drink.recipe}
         </p>
       </div>
-      <Button variant="outline" className="mt-4 self-end" onClick={() => onOrder(drink)}>
+      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+      <Button variant="outline" className="mt-4 self-end" onClick={handleOrder}>
         Zamów
       </Button>
     </div>
