@@ -4,19 +4,17 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Alert, AlertDescription } from "../ui/alert";
 import { useNavigate } from "../hooks/useNavigate";
+import { authService } from "@/lib/services/authService";
+import { useAuthStore } from "@/lib/stores/authStore";
 
-interface LoginFormProps {
-  /** Callback function called when the form is submitted */
-  onSubmit: (data: { login: string; password: string }) => Promise<void>;
-}
-
-export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+export const LoginForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [globalError, setGlobalError] = useState("");
   const navigate = useNavigate();
+  const setUser = useAuthStore((state: { setUser: (user: { username: string } | null) => void }) => state.setUser);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -46,10 +44,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 
     setIsLoading(true);
     try {
-      await onSubmit({ login, password });
+      const response = await authService.login({ login, password });
+      setUser({ username: response.username });
       navigate("/");
-    } catch {
-      setGlobalError("Invalid login or password");
+    } catch (error) {
+      setGlobalError(error instanceof Error ? error.message : "Login failed");
     } finally {
       setIsLoading(false);
     }
@@ -93,12 +92,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         <Button type="submit" className="w-full" disabled={isLoading}>
           {isLoading ? "Logging in..." : "Login"}
         </Button>
-
-        <div className="text-center space-y-2">
-          <a href="/forgot-password" className="text-sm text-blue-500 hover:text-blue-400 block">
-            Forgot password?
-          </a>
-        </div>
       </div>
     </form>
   );

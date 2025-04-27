@@ -1,3 +1,23 @@
+import type { AuthState } from "@/lib/stores/authStore";
+
+declare module "zustand" {
+  interface State extends AuthState {
+  }
+}
+
+export interface LoginCredentials {
+  login: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  username: string;
+}
+
+export interface ErrorResponse {
+  message: string;
+}
+
 export interface IngredientDTO {
   id: number;
   name: string;

@@ -6,12 +6,5 @@ export const prerender = false;
 ---
 
 <AuthLayout>
-  <LoginForm
-    client:load
-    onSubmit={async (data) => {
-      // This will be replaced with actual API call once backend is implemented
-      console.log("Login attempt:", data);
-      throw new Error("Not implemented");
-    }}
-  />
+  <LoginForm client:load />
 </AuthLayout> 

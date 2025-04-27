@@ -1,8 +1,11 @@
 import type {
   AISuggestionRequestDTO,
   DrinkDTO,
+  ErrorResponse,
   IngredientDTO,
   IngredientRequestDTO,
+  LoginCredentials,
+  LoginResponse,
   OrderDTO,
   OrderRequestDTO,
   Page,
@@ -10,6 +13,34 @@ import type {
 } from "../types";
 
 const API_BASE = "http://localhost:8080"; // Use an environment variable or default to '' for relative paths
+
+// Auth API
+export async function login(credentials: LoginCredentials): Promise<LoginResponse> {
+  const response = await fetch(`${API_BASE}/api/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  if (!response.ok) {
+    const error = (await response.json()) as ErrorResponse;
+    throw new Error(error.message || "Invalid login or password");
+  }
+
+  return response.json();
+}
+
+export async function logout(): Promise<void> {
+  const response = await fetch(`${API_BASE}/api/auth/logout`, {
+    method: "POST",
+  });
+
+  if (!response.ok) {
+    throw new Error("Logout failed");
+  }
+}
 
 // Ingredient API
 export async function fetchIngredients(params?: {
