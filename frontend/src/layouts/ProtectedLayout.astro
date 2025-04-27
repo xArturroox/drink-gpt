@@ -1,0 +1,27 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import TopBarWrapper from "@/components/TopBarWrapper";
+
+// This will be replaced with actual session check once backend is implemented
+const isAuthenticated = false;
+
+if (!isAuthenticated) {
+  return Astro.redirect("/login");
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DrinkGPT - Host Panel</title>
+    <ViewTransitions />
+  </head>
+  <body class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <TopBarWrapper client:load />
+    <div class="container mx-auto px-4 py-8">
+      <slot />
+    </div>
+  </body>
+</html> 
