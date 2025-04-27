@@ -43,7 +43,7 @@ Tytuł: Logowanie gospodarza
 Opis: Jako gospodarz chcę móc zalogować się do systemu, aby uzyskać dostęp do funkcjonalności zarządzania składnikami, drinkami i kolejką zamówień.  
 Kryteria akceptacji:
 - Użytkownik wprowadza poprawne dane logowania.
-- Po logowaniu gospodarz widzi panel zarządzania.
+- Po logowaniu gospodarz widzi strony z drinkami, składnikami i zamówieniami.
 - Funkcje dostępne są tylko dla zalogowanych użytkowników.
 
 US-002  
@@ -88,6 +88,20 @@ Kryteria akceptacji:
 - Po wysłaniu tekstu system wysyła dane do AI wraz z listą dostępnych składników, która zwraca propozycję drinka wraz z krótkim opisem.
 - Propozycja drinka jest wyświetlana gościowi, który może ją zaakceptować.
 - Po akceptacji propozycji, zamówienie zostaje dodane do kolejki z przypisaniem unikalnego UUID.
+
+US-007: Bezpieczny dostęp i uwierzytelnianie
+
+- Tytuł: Bezpieczny dostęp
+- Opis: Jako gospodarz chcę mieć możliwość logowania się do systemu w sposób zapewniający bezpieczeństwo moich danych.
+- Kryteria akceptacji:
+  - Logowanie się na dedykowanych stronach.
+  - Logowanie wymaga podania adresu loginu i hasła.
+  - Użytkownik Nie MOŻE korzystać z stron z drinkami, składnikami i zamówieniami bez logowania się do systemu (US-001).
+  - Użytkownik NIE MOŻE korzystać z funkcji US-002, US-003, US-004 bez logowania się do systemu.
+  - Użytkownik może logować się do systemu poprzez przycisk w prawym górnym rogu.
+  - Użytkownik może się wylogować z systemu poprzez przycisk w prawym górnym rogu w głównym
+  - Nie korzystamy z zewnętrznych serwisów logowania (np. Google, GitHub).
+  - Do logowania używamy sbudowanych endpointów dostarczonych przez Spring Security
 
 ## 6. Metryki sukcesu
 - Aplikacja musi generować propozycję drinka na podstawie każdego wpisanego przez gościa opisu preferencji.
