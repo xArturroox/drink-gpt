@@ -5,10 +5,20 @@ import IngredientListToolbar from "./IngredientListToolbar.tsx";
 import IngredientList from "./IngredientList.tsx";
 import IngredientModalForm from "./IngredientModalForm.tsx";
 import ConfirmationDialog from "./ConfirmationDialog.tsx";
-import type { IngredientDTO, IngredientRequestDTO } from "@/types";
+import type { IngredientDTO, IngredientRequestDTO, Pagination } from "@/types";
+import PaginationControls from "../PaginationControls.tsx";
 
 const HostIngredientsPage: React.FC = () => {
-  const { ingredients, loading, error, createIngredient, updateIngredient, deleteIngredient } = useIngredients();
+  const {
+    ingredients,
+    pagination,
+    loading,
+    error,
+    createIngredient,
+    updateIngredient,
+    deleteIngredient,
+    setPagination,
+  } = useIngredients();
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [isModalOpen, setModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<IngredientDTO | null>(null);
@@ -42,6 +52,8 @@ const HostIngredientsPage: React.FC = () => {
   const handleModalCancel = () => {
     setModalOpen(false);
   };
+
+  const handlePageChange = (newPagination: Pagination) => setPagination(newPagination);
 
   const handleDeleteConfirm = async () => {
     if (targetId) {
@@ -81,6 +93,7 @@ const HostIngredientsPage: React.FC = () => {
           onCancel={handleModalCancel}
         />
       )}
+      <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={loading} />
       <ConfirmationDialog isOpen={isConfirmOpen} onConfirm={handleDeleteConfirm} onCancel={closeConfirm} />
     </div>
   );

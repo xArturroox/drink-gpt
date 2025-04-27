@@ -4,7 +4,7 @@ import type { FilterOptions, OrderDTO, OrderViewModel, Pagination } from "@/type
 
 export default function useOrders() {
   const [orders, setOrders] = useState<OrderViewModel[]>([]);
-  const [filters, setFilters] = useState<FilterOptions>({});
+  const [filters, setFilters] = useState<FilterOptions>({ status: "pending" });
   const [pagination, setPagination] = useState<Pagination>({ page: 0, size: 20 });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);

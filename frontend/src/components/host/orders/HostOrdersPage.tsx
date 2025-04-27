@@ -3,7 +3,7 @@ import useOrders from "@/lib/hooks/useOrders";
 import useConfirmationDialog from "@/lib/hooks/useConfirmationDialog";
 import FilterSortControls from "./FilterSortControls";
 import OrderTable from "./OrderTable";
-import PaginationControls from "./PaginationControls";
+import PaginationControls from "../PaginationControls";
 import ConfirmationDialog from "./ConfirmationDialog";
 import type { FilterOptions, Pagination } from "@/types";
 

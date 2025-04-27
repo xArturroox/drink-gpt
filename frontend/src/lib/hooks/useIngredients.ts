@@ -5,10 +5,11 @@ import {
   fetchIngredients as fetchIngredientsApi,
   updateIngredient as updateIngredientApi,
 } from "@/lib/api";
-import type { IngredientDTO, IngredientRequestDTO } from "@/types";
+import type { IngredientDTO, IngredientRequestDTO, Pagination } from "@/types";
 
 export default function useIngredients() {
   const [ingredients, setIngredients] = useState<IngredientDTO[]>([]);
+  const [pagination, setPagination] = useState<Pagination>({ page: 0, size: 20 });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -16,7 +17,7 @@ export default function useIngredients() {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchIngredientsApi();
+      const data = await fetchIngredientsApi({ page: pagination.page, size: pagination.size });
       setIngredients(data);
     } catch (err: unknown) {
       if (err instanceof Error) setError(err);
@@ -24,7 +25,7 @@ export default function useIngredients() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [pagination.page, pagination.size]);
 
   const createIngredient = useCallback(
     async (request: IngredientRequestDTO) => {
@@ -81,5 +82,14 @@ export default function useIngredients() {
     fetchAllIngredients();
   }, [fetchAllIngredients]);
 
-  return { ingredients, loading, error, createIngredient, updateIngredient, deleteIngredient };
-} 
+  return {
+    ingredients,
+    pagination,
+    loading,
+    error,
+    createIngredient,
+    updateIngredient,
+    deleteIngredient,
+    setPagination,
+  };
+}

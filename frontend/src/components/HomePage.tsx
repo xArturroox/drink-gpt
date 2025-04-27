@@ -74,7 +74,6 @@ const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow container mx-auto p-4 space-y-8">
-        <DrinksList drinks={drinks} onSelect={handleSelectDrink} />
         <AISuggestionPanel onSubmit={handleAISubmit} />
         <SuggestionResultModal
           suggestion={suggestion!}
@@ -82,6 +81,7 @@ const HomePage: React.FC = () => {
           onConfirm={handleConfirmSuggestion}
           onCancel={() => setSuggestion(null)}
         />
+        <DrinksList drinks={drinks} onSelect={handleSelectDrink} />
         <OrderConfirmationModal order={orderResult} isOpen={!!orderResult} onClose={() => setOrderResult(null)} />
       </main>
     </div>

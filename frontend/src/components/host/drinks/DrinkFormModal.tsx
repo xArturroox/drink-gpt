@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import { useFieldArray, useForm } from "react-hook-form";
 import type { DrinkFormValues } from "@/types";
-import IngredientSelector from "./IngredientSelector";
 import { Button } from "@/components/ui/button";
+import IngredientSelector from "./IngredientSelector";
 
 interface DrinkFormModalProps {
   isOpen: boolean;

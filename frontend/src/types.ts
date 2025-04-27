@@ -77,8 +77,6 @@ export interface OrderViewModel {
 
 export interface FilterOptions {
   status?: "pending" | "served";
-  from?: Date;
-  to?: Date;
 }
 
 export interface Pagination {
@@ -96,4 +94,12 @@ export interface DrinkFormValues {
   name: string;
   ingredients: { id: number; quantity: number; unit: string }[];
   recipe: string;
+}
+
+export interface Page<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
 }

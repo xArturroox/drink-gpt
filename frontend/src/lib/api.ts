@@ -5,6 +5,7 @@ import type {
   IngredientRequestDTO,
   OrderDTO,
   OrderRequestDTO,
+  Page,
   SuggestedDrinkDTO,
 } from "../types";
 
@@ -22,7 +23,8 @@ export async function fetchIngredients(params?: {
   if (params?.available !== undefined) queryParams.append("available", params.available.toString());
   const response = await fetch(`${API_BASE}/api/ingredients?${queryParams.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch ingredients");
-  return response.json();
+  const pageResponse: Page<IngredientDTO> = await response.json();
+  return pageResponse.content;
 }
 
 export async function fetchIngredientById(id: number): Promise<IngredientDTO> {
@@ -66,7 +68,8 @@ export async function fetchOrders(params?: { page?: number; size?: number; statu
   if (params?.status) queryParams.append("status", params.status);
   const response = await fetch(`${API_BASE}/api/orders?${queryParams.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch orders");
-  return response.json();
+  const pageResponse: Page<OrderDTO> = await response.json();
+  return pageResponse.content;
 }
 
 export async function createOrder(request: OrderRequestDTO): Promise<OrderDTO> {
@@ -104,8 +107,8 @@ export async function fetchDrinks(params?: {
   if (params?.size) queryParams.append("size", params.size.toString());
   if (params?.ingredientId) queryParams.append("ingredientId", params.ingredientId.toString());
   const response = await fetch(`${API_BASE}/api/drinks?${queryParams.toString()}`);
-  if (!response.ok) throw new Error("Failed to fetch drinks");
-  return response.json();
+  const pageResponse: Page<DrinkDTO> = await response.json();
+  return pageResponse.content;
 }
 
 export async function fetchDrinkById(id: number): Promise<DrinkDTO> {

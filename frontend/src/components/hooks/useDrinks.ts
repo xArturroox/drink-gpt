@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { createDrink, deleteDrink, fetchDrinks, updateDrink } from "@/lib/api";
-import type { DrinkDTO, DrinkViewModel } from "@/types";
+import type { DrinkDTO, DrinkViewModel, Pagination } from "@/types";
 
 export function useDrinks() {
   const [drinks, setDrinks] = useState<DrinkViewModel[]>([]);
+  const [pagination, setPagination] = useState<Pagination>({ page: 0, size: 20 });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -11,7 +12,7 @@ export function useDrinks() {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await fetchDrinks();
+      const data = await fetchDrinks({ page: pagination.page, size: pagination.size });
       const availableDrinks = data.filter((d) => d.ingredients.every((i) => i.ingredient.available));
       const viewModels: DrinkViewModel[] = availableDrinks.map((d) => ({
         id: d.id,
@@ -29,7 +30,7 @@ export function useDrinks() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [pagination.page, pagination.size]);
 
   const create = useCallback(
     async (values: Omit<DrinkDTO, "id">) => {
@@ -59,5 +60,5 @@ export function useDrinks() {
     fetchAll();
   }, [fetchAll]);
 
-  return { drinks, isLoading, error, fetchAll, create, update, remove };
+  return { drinks, pagination, isLoading, error, fetchAll, create, update, remove, setPagination };
 }
