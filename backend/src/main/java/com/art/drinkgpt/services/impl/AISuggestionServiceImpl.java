@@ -2,80 +2,70 @@ package com.art.drinkgpt.services.impl;
 
 import com.art.drinkgpt.models.dto.AISuggestionRequestDTO;
 import com.art.drinkgpt.models.dto.SuggestedDrinkDTO;
+import com.art.drinkgpt.models.entities.Ingredient;
+import com.art.drinkgpt.repositories.IngredientRepository;
 import com.art.drinkgpt.services.AISuggestionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.ai.openai.api.ResponseFormat;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class AISuggestionServiceImpl implements AISuggestionService {
 
-    private final ChatClient chatClient;
     private static final String PROMPT_TEMPLATE = """
-            Based on the following preferences: {preferences}
+            Na podstawie następujących preferencji zaproponuj jakiś drink: {preferences}
             
-            Suggest a drink recipe in the following format:
-            Name: [drink name]
-            Description: [short description]
-            Ingredients: [list of ingredients with amounts]
-            Recipe: [detailed preparation instructions]
+            Drink może użyć tylko następujących składników: {ingredients}
+            
+            Gdy nie znajdziesz pasującego drinku do preferencji to nie bierz powyższych zaleceń pod uwagę i zwróć przepis na Jagerbomb
             """;
+    private static final String DRINK_JSON_SCHEMA = """
+            {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "description": { "type": "string" },
+                "ingredients": { "type": "string" },
+                "recipe": { "type": "string" }
+              },
+              "required": ["name", "description", "ingredients", "recipe"]
+            }
+            """;
+    private final ObjectMapper objectMapper;
+    private final IngredientRepository ingredientRepository;
+    private final OpenAiChatModel chatClient;
 
     @Override
     public SuggestedDrinkDTO suggestDrink(AISuggestionRequestDTO request) {
         log.debug("Generating drink suggestion for preferences: {}", request.getPreferences());
-        
+        List<String> availableDrinks = ingredientRepository.findByAvailable(true).stream()
+                .map(Ingredient::getName)
+                .toList();
+
         PromptTemplate template = new PromptTemplate(PROMPT_TEMPLATE);
         template.add("preferences", request.getPreferences());
+        template.add("ingredients", availableDrinks);
+        Prompt prompt = template.create(OpenAiChatOptions.builder()
+                .responseFormat(new ResponseFormat(ResponseFormat.Type.JSON_SCHEMA, DRINK_JSON_SCHEMA))
+                .build());
 
-        ChatResponse response = chatClient.prompt(template.create()).call().entity(ChatResponse.class);
-        String content = response.getResult().getOutput().getText();
-        
-        return parseSuggestion(content);
-    }
+        ChatResponse response = chatClient.call(prompt);
 
-    private SuggestedDrinkDTO parseSuggestion(String content) {
-        String[] lines = content.split("\n");
-        String name = "";
-        String description = "";
-        String ingredients = "";
-        String recipe = "";
-        
-        StringBuilder currentSection = new StringBuilder();
-        String currentKey = "";
-        
-        for (String line : lines) {
-            if (line.startsWith("Name:")) {
-                name = line.substring(5).trim();
-            } else if (line.startsWith("Description:")) {
-                currentKey = "description";
-                currentSection = new StringBuilder();
-            } else if (line.startsWith("Ingredients:")) {
-                if ("description".equals(currentKey)) {
-                    description = currentSection.toString().trim();
-                }
-                currentKey = "ingredients";
-                currentSection = new StringBuilder();
-            } else if (line.startsWith("Recipe:")) {
-                if ("ingredients".equals(currentKey)) {
-                    ingredients = currentSection.toString().trim();
-                }
-                currentKey = "recipe";
-                currentSection = new StringBuilder();
-            } else if (!line.trim().isEmpty()) {
-                currentSection.append(line.trim()).append("\n");
-            }
+        try {
+            return objectMapper.readValue(response.getResult().getOutput().getText(), SuggestedDrinkDTO.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to parse AI response", e);
         }
-        
-        if ("recipe".equals(currentKey)) {
-            recipe = currentSection.toString().trim();
-        }
-        
-        return new SuggestedDrinkDTO(name, description, ingredients, recipe);
     }
 } 
