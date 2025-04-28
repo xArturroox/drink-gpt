@@ -1,10 +1,16 @@
 import { defineConfig } from "vitest/config";
 import { getViteConfig } from "astro/config";
 import react from "@astrojs/react";
+import path from "path";
 
 export default defineConfig({
   ...getViteConfig(),
   plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   test: {
     environment: "jsdom",
     globals: true,
