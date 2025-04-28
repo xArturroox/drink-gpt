@@ -2,9 +2,9 @@
 import AuthLayout from "../layouts/AuthLayout.astro";
 import { LoginForm } from "@/components/auth/LoginForm";
 
-export const prerender = false;
+export const prerender = true;
 ---
 
 <AuthLayout>
-  <LoginForm client:load />
+  <LoginForm client:only="react" />
 </AuthLayout> 

@@ -31,7 +31,7 @@ Java and Spring Boot Usage
 - Implement proper validation using Bean Validation (e.g., @Valid, custom validators).
 
 Configuration and Properties
-- Use application.properties or application.yml for configuration.
+- Use application.yml for configuration.
 - Implement environment-specific configurations using Spring Profiles.
 - Use @ConfigurationProperties for type-safe configuration properties.
 

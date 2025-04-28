@@ -1,6 +1,7 @@
 ---
-export const prerender = false;
+export const prerender = true;
+---
 
-// This will be replaced with actual logout logic once backend is implemented
-return Astro.redirect("/login");
---- 
+<script>
+  window.location.href = "/login";
+</script> 
