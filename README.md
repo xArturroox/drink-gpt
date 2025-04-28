@@ -34,6 +34,19 @@ DrinkGPT is a minimal viable product (MVP) designed to streamline the process of
 - Spring Security
 - Spring AI for integrating AI-driven suggestions
 
+**Testing:**
+
+- **Unit Testing:**
+    - Frontend: Vitest, React Testing Library
+    - Backend: JUnit 5, Mockito, AssertJ
+- **Integration Testing:**
+    - Frontend: Vitest, React Testing Library
+    - Backend: Spring Boot Test, JUnit 5, H2 Database (in-memory)
+- **End-to-End Testing:**
+    - Playwright for browser automation and visual testing
+- **Tooling:**
+    - GitHub Actions for CI/CD test automation
+
 ## Getting Started Locally
 
 ### Prerequisites
