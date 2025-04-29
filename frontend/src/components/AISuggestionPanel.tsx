@@ -31,7 +31,7 @@ const AISuggestionPanel: React.FC<AISuggestionPanelProps> = ({ onSubmit, isLoadi
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4" data-testid="ai-suggestion-panel">
       <PreferenceInput
         value={preferences}
         placeholder="Podaj swoje preferencje"
@@ -45,11 +45,19 @@ const AISuggestionPanel: React.FC<AISuggestionPanelProps> = ({ onSubmit, isLoadi
           onChange={(e) => setGuestName(e.target.value)}
           placeholder="Twoje imię"
           className="w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"
+          data-testid="guest-name-input"
         />
-        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+        {error && <p className="text-red-500 text-sm mt-1" data-testid="guest-name-error">{error}</p>}
       </div>
-      <Button className="mt-4" onClick={handleSubmit} disabled={isLoading}>
-        {isLoading ? "Proponowanie..." : "Proponuj"}
+      <Button
+        className="mt-4"
+        onClick={handleSubmit}
+        disabled={isLoading}
+        data-testid="generate-drink-button"
+      >
+        {isLoading ? (
+          <span data-testid="suggestion-loading-indicator">Proponowanie...</span>
+        ) : "Proponuj"}
       </Button>
     </div>
   );

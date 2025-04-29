@@ -22,3 +22,13 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+/playwright-report/data/540e3b05bec12a398b72893d033667ff86ca8134.md
+/playwright-report/data/34261c00f25babae43ea3b5408eacdf77367bce4.png
+/playwright-report/index.html
+/test-results/example-has-title-chromium/error-context.md
+/test-results/example-has-title-chromium/test-failed-1.png
+/test-results/example-navigation-works-chromium/test-failed-1.png
+/test-results/.last-run.json
+/playwright-report/data/6d5c7d4913a1fa0bb7c66fe747338d933a8799a4.png
+/playwright-report/data/753742fb29b09fdb9c4638a3328c1c077a623f21.md
+/playwright-report/data/b652647ffa5d2c24c112b228a6d81c27cdbdbea9.png

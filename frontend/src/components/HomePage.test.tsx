@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import HomePage from "../HomePage";
-import { createOrder, suggestDrink } from "../../lib/api";
-import { useDrinks } from "../hooks/useDrinks";
-import AISuggestionPanel from "../AISuggestionPanel";
+import HomePage from "./HomePage.tsx";
+import { createOrder, suggestDrink } from "../lib/api.ts";
+import { useDrinks } from "./hooks/useDrinks.ts";
+import AISuggestionPanel from "./AISuggestionPanel.tsx";
 
 // Mock the API functions
 vi.mock("../../lib/api", () => ({

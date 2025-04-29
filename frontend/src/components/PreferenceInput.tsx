@@ -19,8 +19,9 @@ const PreferenceInput: React.FC<PreferenceInputProps> = ({ value, placeholder, e
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="w-full p-2 border rounded-md min-h-[100px] dark:bg-gray-700 dark:border-gray-600"
+        data-testid="preference-input"
       />
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      {error && <p className="text-red-500 text-sm mt-1" data-testid="preference-input-error">{error}</p>}
     </div>
   );
 };

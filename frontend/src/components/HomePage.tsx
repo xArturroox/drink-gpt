@@ -14,10 +14,12 @@ const HomePage: React.FC = () => {
   const [orderResult, setOrderResult] = useState<OrderDTO | null>(null);
   const [isSuggesting, setIsSuggesting] = useState(false);
   const [isOrdering, setIsOrdering] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
 
   const handleAISubmit = async (preferences: string, guestName: string) => {
     if (!guestName.trim()) return;
     setIsSuggesting(true);
+    setAiError(null);
     try {
       const resp = await suggestDrink({ preferences });
       const viewModel: AISuggestionViewModel = {
@@ -29,6 +31,7 @@ const HomePage: React.FC = () => {
       setSuggestion(viewModel);
     } catch (error) {
       console.error(error);
+      setAiError(error instanceof Error ? error.message : "Wystąpił problem podczas generowania propozycji drinka.");
     } finally {
       setIsSuggesting(false);
     }
@@ -73,9 +76,15 @@ const HomePage: React.FC = () => {
 
   return (
     <GuestNameProvider>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col" data-testid="home-page">
         <main className="flex-grow container mx-auto p-4 space-y-8">
           <AISuggestionPanel onSubmit={handleAISubmit} isLoading={isSuggesting} />
+          {aiError && (
+            <div className="bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100 p-4 rounded-lg"
+                 data-testid="suggestion-error-message">
+              {aiError}
+            </div>
+          )}
           {suggestion && (
             <SuggestionResultModal
               suggestion={suggestion}

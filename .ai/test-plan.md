@@ -75,8 +75,8 @@ Główne cele procesu testowania to:
 
 * **Generowanie propozycji drinka:**
     * Użytkownik otwiera stronę główną.
-    * Użytkownik inicjuje proces generowania propozycji (np. klika przycisk).
     * Użytkownik wprowadza preferencje (składniki, typ drinka itp.).
+  * Użytkownik inicjuje proces generowania propozycji (np. klika przycisk).
     * Aplikacja wysyła zapytanie do backendu.
     * Backend przetwarza zapytanie i komunikuje się z AI.
     * AI zwraca propozycję.
