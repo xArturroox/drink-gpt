@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDrinks } from "@/components/hooks/useDrinks";
 import { fetchDrinkById } from "@/lib/api";
-import type { DrinkFormValues, Pagination } from "@/types";
+import type { DrinkFormValues, DrinkViewModel, Pagination } from "@/types";
 import PaginationControls from "../PaginationControls";
 import { Button } from "@/components/ui/button";
 import DrinkList from "./DrinkList";
@@ -9,13 +9,13 @@ import DrinkFormModal from "./DrinkFormModal";
 import ConfirmDialog from "./ConfirmDialog";
 
 const HostDrinksView: React.FC = () => {
-  const { drinks, pagination, isLoading, error, fetchAll, create, update, remove, setPagination } = useDrinks();
+  const { drinks, pagination, isLoading, error, create, update, remove, setPagination } = useDrinks();
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingId, setEditingId] = useState<number | null>(null);
   const [initialValues, setInitialValues] = useState<DrinkFormValues | undefined>(undefined);
   const [isFormModalOpen, setFormModalOpen] = useState(false);
   const [isConfirmOpen, setConfirmOpen] = useState(false);
-  const [drinkToDelete, setDrinkToDelete] = useState<any>(null);
+  const [drinkToDelete, setDrinkToDelete] = useState<DrinkViewModel | null>(null);
 
   const handleAddClick = () => {
     setModalMode("add");
@@ -24,7 +24,7 @@ const HostDrinksView: React.FC = () => {
     setFormModalOpen(true);
   };
 
-  const handleEditClick = async (drink) => {
+  const handleEditClick = async (drink: DrinkViewModel) => {
     setModalMode("edit");
     try {
       const dto = await fetchDrinkById(drink.id);
@@ -41,7 +41,7 @@ const HostDrinksView: React.FC = () => {
     }
   };
 
-  const handleDeleteClick = (drink) => {
+  const handleDeleteClick = (drink: DrinkViewModel) => {
     setDrinkToDelete(drink);
     setConfirmOpen(true);
   };
@@ -50,7 +50,16 @@ const HostDrinksView: React.FC = () => {
     if (modalMode === "add") {
       await create(values);
     } else if (modalMode === "edit" && editingId !== null) {
-      await update(editingId, values);
+      const transformedValues = {
+        name: values.name,
+        ingredients: values.ingredients.map((i) => ({
+          ingredient: { id: i.id, name: "", available: true },
+          quantity: i.quantity,
+          unit: i.unit,
+        })),
+        recipe: values.recipe,
+      };
+      await update(editingId, transformedValues);
     }
     setFormModalOpen(false);
   };

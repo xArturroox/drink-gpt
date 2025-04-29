@@ -4,7 +4,7 @@ import react from "@astrojs/react";
 import path from "path";
 
 export default defineConfig({
-  ...getViteConfig(),
+  ...getViteConfig({ root: "." }),
   plugins: [react()],
   resolve: {
     alias: {

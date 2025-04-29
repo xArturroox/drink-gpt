@@ -11,17 +11,15 @@ export interface AuthState {
   isAuthenticated: boolean;
 }
 
-type SetState = (state: Partial<AuthState>) => void
-
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set: SetState) => ({
+    (set) => ({
       user: null,
       isAuthenticated: false,
       setUser: (user: User | null) => set({ user, isAuthenticated: !!user }),
     }),
     {
       name: "auth-storage",
-    },
-  ),
+    }
+  )
 );

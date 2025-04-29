@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { createDrink, deleteDrink, fetchDrinks, updateDrink } from "@/lib/api";
-import type { DrinkDTO, DrinkViewModel, Pagination } from "@/types";
+import type { DrinkDTO, DrinkFormValues, DrinkViewModel, Pagination } from "@/types";
 
 export function useDrinks() {
   const [drinks, setDrinks] = useState<DrinkViewModel[]>([]);
@@ -33,8 +33,17 @@ export function useDrinks() {
   }, [pagination.page, pagination.size]);
 
   const create = useCallback(
-    async (values: Omit<DrinkDTO, "id">) => {
-      await createDrink({ ...values, id: 0 });
+    async (values: DrinkFormValues) => {
+      await createDrink({
+        id: 0,
+        name: values.name,
+        ingredients: values.ingredients.map((ing) => ({
+          ingredient: { id: ing.id, name: "", available: true },
+          quantity: ing.quantity,
+          unit: ing.unit,
+        })),
+        recipe: values.recipe,
+      });
       await fetchAll();
     },
     [fetchAll],
