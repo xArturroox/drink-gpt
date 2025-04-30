@@ -1,6 +1,7 @@
 import { useNavigate } from "./useNavigate";
 import { useAuthStore } from "@/lib/stores/authStore";
 import { authService } from "@/lib/services/authService";
+import { logger } from "@/lib/logger";
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const useAuth = () => {
       setUser(null);
       navigate("/");
     } catch (error) {
-      console.error("Logout failed:", error);
+      logger.error("Logout failed:", error);
     }
   };
 
@@ -26,4 +27,4 @@ export const useAuth = () => {
     handleLogin,
     handleLogout,
   };
-}; 
+};

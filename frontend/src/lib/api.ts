@@ -13,8 +13,6 @@ import type {
 } from "../types";
 import { createFetchOptions, createUrl } from "./api/fetchConfig";
 
-const API_BASE = "http://localhost:8080"; // Use an environment variable or default to '' for relative paths
-
 // Auth API
 export async function login(credentials: LoginCredentials): Promise<LoginResponse> {
   const response = await fetch(
@@ -22,7 +20,7 @@ export async function login(credentials: LoginCredentials): Promise<LoginRespons
     createFetchOptions({
       method: "POST",
       body: JSON.stringify(credentials),
-    }),
+    })
   );
 
   if (!response.ok) {
@@ -38,7 +36,7 @@ export async function logout(): Promise<void> {
     createUrl("/api/auth/logout"),
     createFetchOptions({
       method: "POST",
-    }),
+    })
   );
 
   if (!response.ok) {
@@ -57,22 +55,16 @@ export async function fetchIngredients(params?: {
   if (params?.size) queryParams.append("size", params.size.toString());
   if (params?.available !== undefined) queryParams.append("available", params.available.toString());
 
-  const response = await fetch(
-    createUrl(`/api/ingredients?${queryParams.toString()}`),
-    createFetchOptions(),
-  );
-  
+  const response = await fetch(createUrl(`/api/ingredients?${queryParams.toString()}`), createFetchOptions());
+
   if (!response.ok) throw new Error("Failed to fetch ingredients");
   const pageResponse: Page<IngredientDTO> = await response.json();
   return pageResponse.content;
 }
 
 export async function fetchIngredientById(id: number): Promise<IngredientDTO> {
-  const response = await fetch(
-    createUrl(`/api/ingredients/${id}`),
-    createFetchOptions(),
-  );
-  
+  const response = await fetch(createUrl(`/api/ingredients/${id}`), createFetchOptions());
+
   if (!response.ok) throw new Error(`Failed to fetch ingredient with id ${id}`);
   return response.json();
 }
@@ -83,9 +75,9 @@ export async function createIngredient(request: IngredientRequestDTO): Promise<I
     createFetchOptions({
       method: "POST",
       body: JSON.stringify(request),
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to create ingredient");
   return response.json();
 }
@@ -96,9 +88,9 @@ export async function updateIngredient(id: number, request: IngredientRequestDTO
     createFetchOptions({
       method: "PATCH",
       body: JSON.stringify(request),
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to update ingredient");
   return response.json();
 }
@@ -108,9 +100,9 @@ export async function deleteIngredient(id: number): Promise<void> {
     createUrl(`/api/ingredients/${id}`),
     createFetchOptions({
       method: "DELETE",
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to delete ingredient");
 }
 
@@ -121,11 +113,8 @@ export async function fetchOrders(params?: { page?: number; size?: number; statu
   if (params?.size !== undefined) queryParams.append("size", params.size.toString());
   if (params?.status) queryParams.append("status", params.status);
 
-  const response = await fetch(
-    createUrl(`/api/orders?${queryParams.toString()}`),
-    createFetchOptions(),
-  );
-  
+  const response = await fetch(createUrl(`/api/orders?${queryParams.toString()}`), createFetchOptions());
+
   if (!response.ok) throw new Error("Failed to fetch orders");
   const pageResponse: Page<OrderDTO> = await response.json();
   return pageResponse.content;
@@ -137,9 +126,9 @@ export async function createOrder(request: OrderRequestDTO): Promise<OrderDTO> {
     createFetchOptions({
       method: "POST",
       body: JSON.stringify(request),
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to create order");
   return response.json();
 }
@@ -149,9 +138,9 @@ export async function markOrderAsServed(orderId: number): Promise<void> {
     createUrl(`/api/orders/${orderId}/served`),
     createFetchOptions({
       method: "PATCH",
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to mark order as served");
 }
 
@@ -160,9 +149,9 @@ export async function deleteOrder(orderId: number): Promise<void> {
     createUrl(`/api/orders/${orderId}`),
     createFetchOptions({
       method: "DELETE",
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to delete order");
 }
 
@@ -177,10 +166,7 @@ export async function fetchDrinks(params?: {
   if (params?.size) queryParams.append("size", params.size.toString());
   if (params?.ingredientId) queryParams.append("ingredientId", params.ingredientId.toString());
 
-  const response = await fetch(
-    createUrl(`/api/drinks?${queryParams.toString()}`),
-    createFetchOptions(),
-  );
+  const response = await fetch(createUrl(`/api/drinks?${queryParams.toString()}`), createFetchOptions());
 
   if (!response.ok) throw new Error("Failed to fetch drinks");
   const pageResponse: Page<DrinkDTO> = await response.json();
@@ -188,11 +174,8 @@ export async function fetchDrinks(params?: {
 }
 
 export async function fetchDrinkById(id: number): Promise<DrinkDTO> {
-  const response = await fetch(
-    createUrl(`/api/drinks/${id}`),
-    createFetchOptions(),
-  );
-  
+  const response = await fetch(createUrl(`/api/drinks/${id}`), createFetchOptions());
+
   if (!response.ok) throw new Error(`Failed to fetch drink with id ${id}`);
   return response.json();
 }
@@ -203,9 +186,9 @@ export async function createDrink(request: DrinkDTO): Promise<DrinkDTO> {
     createFetchOptions({
       method: "POST",
       body: JSON.stringify(request),
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to create drink");
   return response.json();
 }
@@ -216,9 +199,9 @@ export async function updateDrink(id: number, request: DrinkDTO): Promise<DrinkD
     createFetchOptions({
       method: "PUT",
       body: JSON.stringify(request),
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to update drink");
   return response.json();
 }
@@ -228,9 +211,9 @@ export async function deleteDrink(id: number): Promise<void> {
     createUrl(`/api/drinks/${id}`),
     createFetchOptions({
       method: "DELETE",
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to delete drink");
 }
 
@@ -241,9 +224,9 @@ export async function suggestDrink(request: AISuggestionRequestDTO): Promise<Sug
     createFetchOptions({
       method: "POST",
       body: JSON.stringify(request),
-    }),
+    })
   );
-  
+
   if (!response.ok) throw new Error("Failed to suggest drink");
   return response.json();
 }

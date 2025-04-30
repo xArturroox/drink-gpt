@@ -41,4 +41,4 @@ export class OrderConfirmationModal extends BasePage {
     // Sprawdza czy w tekście jest słowo "zamówienia" i po nim cyfry
     return /zamówienia:.*\d+/i.test(details || "");
   }
-} 
+}

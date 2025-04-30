@@ -60,4 +60,4 @@ export class DrinksList extends BasePage {
     const card = drinkCards.nth(index);
     await card.getByTestId("order-drink-button").click();
   }
-} 
+}

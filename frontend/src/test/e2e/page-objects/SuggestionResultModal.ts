@@ -45,4 +45,4 @@ export class SuggestionResultModal extends BasePage {
   async cancel() {
     await this.clickElement("cancel-suggestion-button");
   }
-} 
+}

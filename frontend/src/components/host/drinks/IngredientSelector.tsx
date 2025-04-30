@@ -53,7 +53,11 @@ const IngredientSelector: React.FC<IngredientSelectorProps> = ({ fields, append,
       <button type="button" className="mt-2 text-blue-600" onClick={() => append({ id: 0, quantity: 1, unit: "" })}>
         Add Ingredient
       </button>
-      <p className="text-red-600 mt-1">{(errors.ingredients as any).message || "Select at least one ingredient"}</p>
+      <p className="text-red-600 mt-1">
+        {errors.ingredients && "message" in errors.ingredients
+          ? errors.ingredients.message
+          : "Select at least one ingredient"}
+      </p>
     </fieldset>
   );
 };

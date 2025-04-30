@@ -44,4 +44,4 @@ export class BasePage {
   async waitForElement(testId: string, timeoutMs = 5000): Promise<void> {
     await this.page.getByTestId(testId).waitFor({ state: "visible", timeout: timeoutMs });
   }
-} 
+}

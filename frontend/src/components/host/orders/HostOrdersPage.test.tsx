@@ -317,4 +317,4 @@ describe("HostOrdersPage", () => {
       </div>
     `);
   });
-}); 
+});

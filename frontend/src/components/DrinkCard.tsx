@@ -20,23 +20,27 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onOrder }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col justify-between"
-         data-testid={`drink-card-${drink.name}`}>
+    <div
+      className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col justify-between"
+      data-testid={`drink-card-${drink.name}`}
+    >
       <div>
-        <h2 className="text-lg font-semibold mb-2" data-testid="drink-name">{drink.name}</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-2"
-           data-testid="drink-ingredients">{drink.ingredients}</p>
+        <h2 className="text-lg font-semibold mb-2" data-testid="drink-name">
+          {drink.name}
+        </h2>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-2" data-testid="drink-ingredients">
+          {drink.ingredients}
+        </p>
         <p className="text-sm text-gray-500 dark:text-gray-400" data-testid="drink-recipe">
           {drink.recipe.length > 100 ? `${drink.recipe.substring(0, 100)}...` : drink.recipe}
         </p>
       </div>
-      {error && <p className="text-red-500 text-sm mt-2" data-testid="drink-error">{error}</p>}
-      <Button
-        variant="outline"
-        className="mt-4 self-end"
-        onClick={handleOrder}
-        data-testid="order-drink-button"
-      >
+      {error && (
+        <p className="text-red-500 text-sm mt-2" data-testid="drink-error">
+          {error}
+        </p>
+      )}
+      <Button variant="outline" className="mt-4 self-end" onClick={handleOrder} data-testid="order-drink-button">
         Zamów
       </Button>
     </div>

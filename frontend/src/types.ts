@@ -1,10 +1,4 @@
-import type { AuthState } from "@/lib/stores/authStore";
-
-declare module "zustand" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface State extends AuthState {
-  }
-}
+// Zustand store typings are handled in the store definition
 
 export interface LoginCredentials {
   login: string;

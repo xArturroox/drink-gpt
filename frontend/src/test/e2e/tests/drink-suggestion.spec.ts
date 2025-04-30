@@ -86,4 +86,4 @@ test.describe("Generowanie propozycji drinka", () => {
     // Sprawdź, czy pojawił się komunikat o błędzie preferencji
     expect(await page.getByTestId("preference-input-error").isVisible()).toBeTruthy();
   });
-}); 
+});

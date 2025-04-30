@@ -7,13 +7,13 @@ import { useDrinks } from "./hooks/useDrinks";
 import { createOrder, suggestDrink } from "../lib/api";
 import type { AISuggestionViewModel, DrinkViewModel, OrderDTO } from "../types";
 import { GuestNameProvider } from "./contexts/GuestNameContext";
+import { logger } from "../lib/logger";
 
 const HomePage: React.FC = () => {
   const { drinks } = useDrinks();
   const [suggestion, setSuggestion] = useState<AISuggestionViewModel | null>(null);
   const [orderResult, setOrderResult] = useState<OrderDTO | null>(null);
   const [isSuggesting, setIsSuggesting] = useState(false);
-  const [isOrdering, setIsOrdering] = useState(false);
   const [aiError, setAiError] = useState<string | null>(null);
 
   const handleAISubmit = async (preferences: string, guestName: string) => {
@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
       };
       setSuggestion(viewModel);
     } catch (error) {
-      console.error(error);
+      logger.error(error);
       setAiError(error instanceof Error ? error.message : "Wystąpił problem podczas generowania propozycji drinka.");
     } finally {
       setIsSuggesting(false);
@@ -39,7 +39,6 @@ const HomePage: React.FC = () => {
 
   const handleConfirmSuggestion = async (suggestionVM: AISuggestionViewModel, guestName: string) => {
     if (!guestName.trim()) return;
-    setIsOrdering(true);
     try {
       const order = await createOrder({
         drinkName: suggestionVM.name,
@@ -50,15 +49,12 @@ const HomePage: React.FC = () => {
       setOrderResult(order);
       setSuggestion(null);
     } catch (error) {
-      console.error(error);
-    } finally {
-      setIsOrdering(false);
+      logger.error(error);
     }
   };
 
   const handleSelectDrink = async (drink: DrinkViewModel, guestName: string) => {
     if (!guestName.trim()) return;
-    setIsOrdering(true);
     try {
       const order = await createOrder({
         drinkName: drink.name,
@@ -68,9 +64,7 @@ const HomePage: React.FC = () => {
       });
       setOrderResult(order);
     } catch (error) {
-      console.error(error);
-    } finally {
-      setIsOrdering(false);
+      logger.error(error);
     }
   };
 
@@ -80,8 +74,10 @@ const HomePage: React.FC = () => {
         <main className="flex-grow container mx-auto p-4 space-y-8">
           <AISuggestionPanel onSubmit={handleAISubmit} isLoading={isSuggesting} />
           {aiError && (
-            <div className="bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100 p-4 rounded-lg"
-                 data-testid="suggestion-error-message">
+            <div
+              className="bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100 p-4 rounded-lg"
+              data-testid="suggestion-error-message"
+            >
               {aiError}
             </div>
           )}
@@ -94,11 +90,7 @@ const HomePage: React.FC = () => {
             />
           )}
           <DrinksList drinks={drinks} onSelect={handleSelectDrink} />
-          <OrderConfirmationModal
-            order={orderResult}
-            isOpen={!!orderResult}
-            onClose={() => setOrderResult(null)}
-          />
+          <OrderConfirmationModal order={orderResult} isOpen={!!orderResult} onClose={() => setOrderResult(null)} />
         </main>
       </div>
     </GuestNameProvider>

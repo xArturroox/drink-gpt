@@ -26,4 +26,4 @@ export const useGuestName = () => {
     throw new Error("useGuestName must be used within a GuestNameProvider");
   }
   return context;
-}; 
+};

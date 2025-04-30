@@ -26,4 +26,4 @@ export function useIngredients() {
   }, []);
 
   return { ingredients, isLoading, error };
-} 
+}

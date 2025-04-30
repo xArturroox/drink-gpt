@@ -21,4 +21,4 @@ export function createFetchOptions(options: FetchOptions = {}): FetchOptions {
 
 export function createUrl(endpoint: string): string {
   return `${API_BASE}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
-} 
+}

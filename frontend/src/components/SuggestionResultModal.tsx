@@ -9,19 +9,16 @@ interface SuggestionResultModalProps {
   onCancel: () => void;
 }
 
-const SuggestionResultModal: React.FC<SuggestionResultModalProps> = ({
-                                                                       suggestion,
-                                                                       isOpen,
-                                                                       onConfirm,
-                                                                       onCancel,
-                                                                     }) => {
+const SuggestionResultModal: React.FC<SuggestionResultModalProps> = ({ suggestion, isOpen, onConfirm, onCancel }) => {
   const { guestName } = useGuestName();
 
   if (!isOpen || !suggestion) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
-         data-testid="suggestion-result-modal">
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
+      data-testid="suggestion-result-modal"
+    >
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-lg w-full">
         <h2 className="text-xl font-semibold mb-4">Proponowany drink</h2>
         <div className="space-y-4">

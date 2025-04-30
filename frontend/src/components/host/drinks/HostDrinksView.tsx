@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import DrinkList from "./DrinkList";
 import DrinkFormModal from "./DrinkFormModal";
 import ConfirmDialog from "./ConfirmDialog";
+import { logger } from "@/lib/logger";
 
 const HostDrinksView: React.FC = () => {
   const { drinks, pagination, isLoading, error, create, update, remove, setPagination } = useDrinks();
@@ -37,7 +38,7 @@ const HostDrinksView: React.FC = () => {
       setInitialValues(formValues);
       setFormModalOpen(true);
     } catch (e) {
-      console.error("Failed to load drink for editing", e);
+      logger.error("Failed to load drink for editing", e);
     }
   };
 
