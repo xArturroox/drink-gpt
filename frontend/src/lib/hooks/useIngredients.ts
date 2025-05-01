@@ -41,7 +41,7 @@ export default function useIngredients() {
         setLoading(false);
       }
     },
-    [fetchAllIngredients],
+    [fetchAllIngredients]
   );
 
   const updateIngredient = useCallback(
@@ -58,7 +58,7 @@ export default function useIngredients() {
         setLoading(false);
       }
     },
-    [fetchAllIngredients],
+    [fetchAllIngredients]
   );
 
   const deleteIngredient = useCallback(
@@ -75,7 +75,7 @@ export default function useIngredients() {
         setLoading(false);
       }
     },
-    [fetchAllIngredients],
+    [fetchAllIngredients]
   );
 
   useEffect(() => {

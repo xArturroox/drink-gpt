@@ -16,16 +16,16 @@ const IngredientList: React.FC<IngredientListProps> = ({ items, onEdit, onDelete
   return (
     <table className="w-full table-auto mb-4 border-collapse">
       <thead>
-      <tr>
-        <th className="border px-4 py-2 text-left">Nazwa</th>
-        <th className="border px-4 py-2 text-left">Dostępny</th>
-        <th className="border px-4 py-2 text-right">Akcje</th>
-      </tr>
+        <tr>
+          <th className="border px-4 py-2 text-left">Nazwa</th>
+          <th className="border px-4 py-2 text-left">Dostępny</th>
+          <th className="border px-4 py-2 text-right">Akcje</th>
+        </tr>
       </thead>
       <tbody>
-      {items.map((item) => (
-        <IngredientItem key={item.id} item={item} onEdit={onEdit} onDelete={onDelete} />
-      ))}
+        {items.map((item) => (
+          <IngredientItem key={item.id} item={item} onEdit={onEdit} onDelete={onDelete} />
+        ))}
       </tbody>
     </table>
   );

@@ -17,41 +17,41 @@ const OrderTable: React.FC<OrderTableProps> = ({ orders, onServe, onDelete, load
     <div className="overflow-x-auto">
       <table aria-label="Lista zamówień" className="min-w-full divide-y divide-gray-200">
         <thead>
-        <tr>
-          <th scope="col" className="px-4 py-2 text-left">
-            #
-          </th>
-          <th scope="col" className="px-4 py-2 text-left">
-            Drink
-          </th>
-          <th scope="col" className="px-4 py-2 text-left">
-            Składniki
-          </th>
-          <th scope="col" className="px-4 py-2 text-left">
-            Przepis
-          </th>
-          <th scope="col" className="px-4 py-2 text-left">
-            Gość
-          </th>
-          <th scope="col" className="px-4 py-2 text-left">
-            Czas
-          </th>
-          <th scope="col" className="px-4 py-2 text-left">
-            Akcje
-          </th>
-        </tr>
+          <tr>
+            <th scope="col" className="px-4 py-2 text-left">
+              #
+            </th>
+            <th scope="col" className="px-4 py-2 text-left">
+              Drink
+            </th>
+            <th scope="col" className="px-4 py-2 text-left">
+              Składniki
+            </th>
+            <th scope="col" className="px-4 py-2 text-left">
+              Przepis
+            </th>
+            <th scope="col" className="px-4 py-2 text-left">
+              Gość
+            </th>
+            <th scope="col" className="px-4 py-2 text-left">
+              Czas
+            </th>
+            <th scope="col" className="px-4 py-2 text-left">
+              Akcje
+            </th>
+          </tr>
         </thead>
         <tbody>
-        {orders.map((order, idx) => (
-          <OrderRow
-            key={order.id}
-            index={idx}
-            order={order}
-            onServe={onServe}
-            onDelete={onDelete}
-            loading={loading}
-          />
-        ))}
+          {orders.map((order, idx) => (
+            <OrderRow
+              key={order.id}
+              index={idx}
+              order={order}
+              onServe={onServe}
+              onDelete={onDelete}
+              loading={loading}
+            />
+          ))}
         </tbody>
       </table>
     </div>

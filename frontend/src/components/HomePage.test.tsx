@@ -44,7 +44,7 @@ vi.mock("./SuggestionResultModal.tsx", () => ({
               {
                 /* mock data */
               },
-              "Test Guest",
+              "Test Guest"
             );
           }}
         >
@@ -122,7 +122,7 @@ describe("HomePage", () => {
                 ingredients: ["test ingredient"],
                 recipe: "test recipe",
               },
-              "Test Guest",
+              "Test Guest"
             )
           }
         >
