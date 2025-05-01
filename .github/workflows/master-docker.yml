@@ -43,9 +43,6 @@ jobs:
       - name: Build App JAR
         run: mvn verify -DskipTests
 
-      - name: Print file tree
-        run: ls -R
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -57,16 +54,16 @@ jobs:
           cache-to: type=gha,mode=max
 
 
-#  deploy:
-#    name: Deploy to DigitalOcean
-#    runs-on: ubuntu-latest
-#    environment: production
-#    steps:
-#      - name: Install doctl
-#        uses: digitalocean/action-doctl@v2
-#        with:
-#          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-#
-#      - name: Deploy to DigitalOcean App Platform
-#        run: |
-#          doctl apps create-deployment ${{ secrets.DIGITALOCEAN_APP_ID }}
+  deploy:
+    name: Deploy to DigitalOcean
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Deploy to DigitalOcean App Platform
+        run: |
+          doctl apps create-deployment ${{ secrets.DIGITALOCEAN_APP_ID }}
