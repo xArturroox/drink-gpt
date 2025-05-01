@@ -31,7 +31,6 @@ Testy - Kompleksowe podejście do zapewnienia jakości:
   - ESLint i Prettier dla frontendu
   - GitHub Actions do automatycznego uruchamiania testów w pipeline CI/CD
 
-CI/CD i Hosting:
-
-- Github Actions do tworzenia pipeline'ów CI/CD
-- DigitalOcean do hostowania aplikacji za pośrednictwem obrazu docker
+CI/CD, Deployment i Hosting:
+- Github Actions do tworzenia pipeline'ów CI/CD.
+- Pliki statyczne zbudowane w frontend będą umieszczane w Backend i hostowane dzięki funkcjonalności Spring Boot do statycznego hostowania plików.
