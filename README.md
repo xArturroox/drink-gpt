@@ -1,4 +1,4 @@
-# DrinkGPT
+# DrinkGPT test
 
 ## Table of Contents
 1. [Project Name](#project-name)
