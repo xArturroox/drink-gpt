@@ -1,4 +1,4 @@
-# DrinkGPT
+# DrinkGPT test
 
 Preview: https://drinkgpt-p8nsk.ondigitalocean.app/
 Host: admin1 admin1
