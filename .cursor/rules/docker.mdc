@@ -11,7 +11,7 @@ alwaysApply: false
 - Always use UPPERCASED keywords
 
 ### Base Image Selection
-- Always use specific version tags matching tech stack (e.g., `node:22-alpine` not `node:latest`)
+- Always use specific version tags matching tech stack 
 - Use images compatible with CI/CD & Github Actions runner - `ubuntu-latest`
 - Choose slim/alpine variants for production images
 - Use two-stage builds to separate build and runtime environments
@@ -54,9 +54,6 @@ alwaysApply: false
 ### Building
 - Use versioning based on commit SHA for image tags
 - Add metadata with labels
-- Enable BuildKit for better performance
-- Always build app in production mode based on provided tech stack
-- Ask if `node_modules` directory is required in runtime
 
 ### Running
 - Set appropriate resource limits
