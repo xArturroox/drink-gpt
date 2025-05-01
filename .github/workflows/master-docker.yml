@@ -19,9 +19,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      
-      - name: Build App JAR
-        run: mvn -B verify -DskipTests
+          cache: 'maven'
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -41,6 +39,9 @@ jobs:
           tags: |
             type=sha,prefix=
             type=raw,value=latest
+
+      - name: Build App JAR
+        run: mvn verify -DskipTests
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
