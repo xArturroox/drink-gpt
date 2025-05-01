@@ -37,18 +37,29 @@ vi.mock("./SuggestionResultModal.tsx", () => ({
     isOpen ? (
       <div data-testid="suggestion-modal">
         <div data-testid="suggestion-details">AI Drink - AI generated drink</div>
-        <button data-testid="confirm-suggestion" onClick={() => {
-          onConfirm({ /* mock data */ }, "Test Guest");
-        }}>
+        <button
+          data-testid="confirm-suggestion"
+          onClick={() => {
+            onConfirm(
+              {
+                /* mock data */
+              },
+              "Test Guest",
+            );
+          }}
+        >
           Confirm
         </button>
-        <button data-testid="cancel-suggestion" onClick={() => {
-          onCancel();
-        }}>
+        <button
+          data-testid="cancel-suggestion"
+          onClick={() => {
+            onCancel();
+          }}
+        >
           Cancel
         </button>
       </div>
-    ) : null,
+    ) : null
   ),
 }));
 
@@ -57,13 +68,16 @@ vi.mock("./OrderConfirmationModal.tsx", () => ({
     isOpen ? (
       <div data-testid="order-modal">
         <div data-testid="order-details">Test Order Drink - Test Guest</div>
-        <button data-testid="close-order" onClick={() => {
-          onClose();
-        }}>
+        <button
+          data-testid="close-order"
+          onClick={() => {
+            onClose();
+          }}
+        >
           Close
         </button>
       </div>
-    ) : null,
+    ) : null
   ),
 }));
 
@@ -139,7 +153,7 @@ describe("HomePage", () => {
             Cancel
           </button>
         </div>
-      ) : null,
+      ) : null
     );
 
     mockedOrderConfirmationModal.mockImplementation(({ order, isOpen, onClose }) =>
@@ -152,7 +166,7 @@ describe("HomePage", () => {
             Close
           </button>
         </div>
-      ) : null,
+      ) : null
     );
   });
 
@@ -249,8 +263,7 @@ describe("HomePage", () => {
     mockedSuggestDrink.mockRejectedValueOnce(new Error("API error"));
 
     // Spy on console.error
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {
-    });
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => undefined);
 
     render(<HomePage />);
 
@@ -274,8 +287,7 @@ describe("HomePage", () => {
     mockedCreateOrder.mockRejectedValueOnce(new Error("API error"));
 
     // Spy on console.error
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {
-    });
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => undefined);
 
     render(<HomePage />);
 

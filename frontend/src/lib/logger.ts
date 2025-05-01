@@ -17,20 +17,24 @@ interface Logger {
 export const logger: Logger = {
   info(message, ...optionalParams) {
     if (process.env.NODE_ENV !== "production") {
+      // eslint-disable-next-line no-console
       console.info(message, ...optionalParams);
     }
   },
   warn(message, ...optionalParams) {
     if (process.env.NODE_ENV !== "production") {
+      // eslint-disable-next-line no-console
       console.warn(message, ...optionalParams);
     }
   },
   error(message, ...optionalParams) {
     // We always log errors, even in production
+    // eslint-disable-next-line no-console
     console.error(message, ...optionalParams);
   },
   debug(message, ...optionalParams) {
     if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
       console.debug(message, ...optionalParams);
     }
   },
