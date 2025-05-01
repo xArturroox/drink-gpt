@@ -57,7 +57,7 @@ jobs:
   deploy:
     name: Deploy to DigitalOcean
     runs-on: ubuntu-latest
-    environment: production
+    needs: build-and-push-docker
     steps:
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
