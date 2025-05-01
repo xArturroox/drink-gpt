@@ -43,6 +43,9 @@ jobs:
       - name: Build App JAR
         run: mvn verify -DskipTests
 
+      - name: Print file tree
+        run: ls -R
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
