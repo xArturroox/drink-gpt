@@ -21,6 +21,7 @@ const baseConfig = tseslint.config({
     "no-console": "warn",
     "no-unused-vars": "off",
     "linebreak-style": "off",
+    "prettier/prettier": ["error", { endOfLine: "auto" }],
   },
 });
 
