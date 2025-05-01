@@ -2,7 +2,7 @@ FROM eclipse-temurin:21-jre-alpine
 
 # Copy the pre-built application JAR from the build context
 # Assumes the JAR is located in backend/target/
-COPY backend/target/drink-gpt-*.jar /app/app.jar
+COPY backend/target/*.jar /app/app.jar
 
 # Expose the application port
 EXPOSE 8080
