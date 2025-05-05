@@ -1,10 +1,7 @@
 package com.art.drinkgpt.models.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "drink_ingredients")
@@ -19,12 +16,14 @@ public class DrinkIngredient {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("drinkId")
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JoinColumn(name = "drink_id", nullable = false)
     private Drink drink;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ingredientId")
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JoinColumn(name = "ingredient_id", nullable = false)
     private Ingredient ingredient;
 

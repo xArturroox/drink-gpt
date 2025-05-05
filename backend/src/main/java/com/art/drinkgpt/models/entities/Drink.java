@@ -2,6 +2,7 @@ package com.art.drinkgpt.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +22,8 @@ public class Drink {
     @Column(nullable = false, length = 2000)
     private String recipe;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "drink", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DrinkIngredient> drinkIngredients = new HashSet<>();
 }

@@ -18,6 +18,7 @@ const DrinkFormModal: React.FC<DrinkFormModalProps> = ({ isOpen, initialValues, 
     control,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<DrinkFormValues>({
     defaultValues: initialValues || { name: "", ingredients: [], recipe: "" },
@@ -59,6 +60,7 @@ const DrinkFormModal: React.FC<DrinkFormModalProps> = ({ isOpen, initialValues, 
               append={append}
               remove={remove}
               register={register as UseFormRegister<DrinkFormValues>}
+              watch={watch}
               errors={errors as FieldErrors<DrinkFormValues>}
             />
           </div>
