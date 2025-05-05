@@ -36,6 +36,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --bg-gradient-from: #f7fafc;
+  --bg-gradient-to: #e6f7ff;
 }
 
 .dark {
@@ -70,6 +72,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --bg-gradient-from: #0f172a;
+  --bg-gradient-to: #1e293b;
 }
 
 @theme inline {
@@ -116,5 +120,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: linear-gradient(to bottom right, var(--bg-gradient-from), var(--bg-gradient-to));
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
   }
 }

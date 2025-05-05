@@ -1,5 +1,6 @@
 import React from "react";
 import type { Pagination } from "@/types";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 
 interface PaginationControlsProps {
   pagination: Pagination;
@@ -26,16 +27,16 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({ pagination, onC
         disabled={disabled || pagination.page === 0}
         aria-label="Poprzednia strona"
       >
-        Prev
+        <ArrowLeftIcon className="w-4 h-4" />
       </button>
-      <span className="px-2">Strona {pagination.page + 1}</span>
+      <span className="px-2">{pagination.page + 1}</span>
       <button
         className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
         onClick={handleNext}
         disabled={disabled}
         aria-label="Następna strona"
       >
-        Next
+        <ArrowRightIcon className="w-4 h-4" />
       </button>
     </div>
   );

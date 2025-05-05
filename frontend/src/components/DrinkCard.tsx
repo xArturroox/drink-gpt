@@ -21,7 +21,7 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onOrder }) => {
 
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col justify-between"
+      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-md p-4 flex flex-col justify-between border border-white/20 dark:border-gray-700/30 hover:shadow-lg transition-shadow"
       data-testid={`drink-card-${drink.name}`}
     >
       <div>
@@ -40,7 +40,12 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onOrder }) => {
           {error}
         </p>
       )}
-      <Button variant="outline" className="mt-4 self-end" onClick={handleOrder} data-testid="order-drink-button">
+      <Button
+        variant="outline"
+        className="mt-4 self-end bg-green-400 hover:bg-green-500 text-black"
+        onClick={handleOrder}
+        data-testid="order-drink-button"
+      >
         Zamów
       </Button>
     </div>

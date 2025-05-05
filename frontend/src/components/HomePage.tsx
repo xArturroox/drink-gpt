@@ -72,10 +72,21 @@ const HomePage: React.FC = () => {
     <GuestNameProvider>
       <div className="min-h-screen flex flex-col" data-testid="home-page">
         <main className="flex-grow container mx-auto p-4 space-y-8">
+          <div
+            className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-lg p-6 mb-6 border border-white/20 dark:border-gray-700/30"
+            data-testid="guest-instructions">
+            <h2 className="text-xl font-semibold mb-3">Witaj w DrinkGPT!</h2>
+            <p className="mb-2">Jako gość możesz:</p>
+            <ul className="list-disc ml-5 space-y-1">
+              <li>Wpisać swoje preferencje lub nastrój, aby AI zaproponowało Ci idealny drink dla Ciebie</li>
+              <li>Wybrać drink z gotowej listy poniżej (pokazujemy tylko te, na które mamy składniki)</li>
+              <li>Złożyć zamówienie, które zostanie zrealizowane przez gospodarza</li>
+            </ul>
+          </div>
           <AISuggestionPanel onSubmit={handleAISubmit} isLoading={isSuggesting} />
           {aiError && (
             <div
-              className="bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100 p-4 rounded-lg"
+              className="bg-red-50/90 dark:bg-red-900/90 backdrop-blur-sm text-red-800 dark:text-red-100 p-4 rounded-lg shadow-md border border-red-100/30 dark:border-red-800/30"
               data-testid="suggestion-error-message"
             >
               {aiError}

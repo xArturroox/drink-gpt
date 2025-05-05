@@ -19,11 +19,16 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink, onEdit, onDelete }) => {
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{preview}</p>
       </div>
       <div className="flex justify-end space-x-2">
-        <Button variant="outline" size="sm" onClick={() => onEdit(drink)}>
-          Edit
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onEdit(drink)}
+          className="bg-blue-400 hover:bg-blue-500 text-black"
+        >
+          Edytuj
         </Button>
         <Button variant="destructive" size="sm" onClick={() => onDelete(drink)}>
-          Delete
+          Usuń
         </Button>
       </div>
     </div>

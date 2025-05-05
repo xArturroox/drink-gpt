@@ -21,9 +21,9 @@ const FilterSortControls: React.FC<FilterSortControlsProps> = ({ filters, onChan
         disabled={disabled}
         aria-disabled={disabled}
       >
-        <option value="">All</option>
-        <option value="pending">Pending</option>
-        <option value="served">Served</option>
+        <option value="">Wszystkie</option>
+        <option value="pending">Do obsłużenia</option>
+        <option value="served">Obsłużone</option>
       </select>
     </div>
   );

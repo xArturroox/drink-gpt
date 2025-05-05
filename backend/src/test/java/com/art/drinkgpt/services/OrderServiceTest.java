@@ -69,7 +69,7 @@ class OrderServiceTest {
         when(orderRepository.findAll(pageable)).thenReturn(orderPage);
 
         // When
-        Page<OrderDTO> result = orderService.getAllOrders(pageable);
+        Page<OrderDTO> result = orderService.getAllOrders(pageable, null);
 
         // Then
         assertNotNull(result);

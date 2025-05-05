@@ -19,14 +19,14 @@ const OrderRow: React.FC<OrderRowProps> = ({ index, order, onServe, onDelete, lo
       <td className="px-4 py-2">{order.recipe}</td>
       <td className="px-4 py-2">{order.guestName}</td>
       <td className="px-4 py-2">{order.orderTimestamp}</td>
-      <td className="px-4 py-2 space-x-2">
+      <td className="px-4 py-2 flex flex-col gap-2">
         {!order.served && (
           <Button size="sm" variant="outline" onClick={() => onServe(order.id)} disabled={loading}>
-            Serve
+            Obsłużone
           </Button>
         )}
         <Button size="sm" variant="destructive" onClick={() => onDelete(order.id)} disabled={loading}>
-          Delete
+          Usuń
         </Button>
       </td>
     </tr>

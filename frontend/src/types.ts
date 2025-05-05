@@ -69,7 +69,7 @@ export interface AISuggestionRequestDTO {
 export interface DrinkViewModel {
   id: number;
   name: string;
-  ingredients: string; // joined list of ingredients e.g. "Rum:50ml; Limonka:20g"
+  ingredients: string;
   recipe: string;
 }
 

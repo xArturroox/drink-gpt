@@ -71,31 +71,40 @@ const HostIngredientsPage: React.FC = () => {
   }, [successMessage]);
 
   return (
-    <div className="p-4">
-      {successMessage && (
-        <div role="status" className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow">
-          {successMessage}
+    <main className="flex-grow container mx-auto p-4 space-y-8">
+      <div className="p-4">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-semibold">Zarządzanie składnikami</h1>
+          <div className="flex justify-end mb-4">
+            <IngredientListToolbar onAddClick={handleAddClick} />
+          </div>
         </div>
-      )}
-      {error && <div className="text-destructive mb-4">{error.message}</div>}
-      {loading && (
-        <div role="status" className="flex items-center mb-4 text-gray-600">
-          <span>Ładowanie składników...</span>
-        </div>
-      )}
-      <h1 className="text-2xl font-semibold mb-4">Zarządzanie Składnikami</h1>
-      <IngredientListToolbar onAddClick={handleAddClick} />
-      <IngredientList items={ingredients} onEdit={handleEditClick} onDelete={handleDeleteClick} />
-      {isModalOpen && (
-        <IngredientModalForm
-          initialValues={editingItem ? { name: editingItem.name, available: editingItem.available } : undefined}
-          onSubmit={handleModalSubmit}
-          onCancel={handleModalCancel}
-        />
-      )}
-      <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={loading} />
-      <ConfirmationDialog isOpen={isConfirmOpen} onConfirm={handleDeleteConfirm} onCancel={closeConfirm} />
-    </div>
+
+        {successMessage && (
+          <div role="status" className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow">
+            {successMessage}
+          </div>
+        )}
+        {error && <div className="text-destructive mb-4">{error.message}</div>}
+        {loading && (
+          <div role="status" className="flex items-center mb-4 text-gray-600">
+            <span>Ładowanie składników...</span>
+          </div>
+        )}
+
+        <IngredientList items={ingredients} onEdit={handleEditClick} onDelete={handleDeleteClick} />
+        {isModalOpen && (
+          <IngredientModalForm
+            initialValues={editingItem ? { name: editingItem.name, available: editingItem.available } : undefined}
+            onSubmit={handleModalSubmit}
+            onCancel={handleModalCancel}
+          />
+        )}
+        <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={loading} />
+        <ConfirmationDialog isOpen={isConfirmOpen} onConfirm={handleDeleteConfirm} onCancel={closeConfirm} />
+      </div>
+    </main>
+
   );
 };
 

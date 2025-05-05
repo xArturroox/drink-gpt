@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -23,11 +23,10 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-    @Override
     @Transactional(readOnly = true)
-    public Page<OrderDTO> getAllOrders(Pageable pageable) {
-        log.debug("Getting all orders with pageable: {}", pageable);
-        return orderRepository.findAll(pageable).map(this::mapToDTO);
+    @Override
+    public Page<OrderDTO> getAllOrders(Pageable pageable, Boolean status) {
+        return Objects.isNull(status) ? orderRepository.findAll(pageable).map(this::mapToDTO) : orderRepository.findAllByServed(pageable, status).map(this::mapToDTO);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
         order.setGuestName(request.getGuestName());
         order.setOrderTimestamp(Instant.now());
         order.setServed(false);
-        
+
         return mapToDTO(orderRepository.save(order));
     }
 

@@ -16,7 +16,12 @@ const IngredientItem: React.FC<IngredientItemProps> = ({ item, onEdit, onDelete 
     </td>
     <td className="border px-4 py-2">
       <div className="flex justify-end space-x-2">
-        <Button size="sm" variant="outline" onClick={() => onEdit(item)}>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => onEdit(item)}
+          className="bg-blue-400 hover:bg-blue-500 text-black"
+        >
           Edytuj
         </Button>
         <Button size="sm" variant="destructive" onClick={() => onDelete(item.id)}>

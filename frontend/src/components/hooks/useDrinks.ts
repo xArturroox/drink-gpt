@@ -17,7 +17,7 @@ export function useDrinks() {
       const viewModels: DrinkViewModel[] = availableDrinks.map((d) => ({
         id: d.id,
         name: d.name,
-        ingredients: d.ingredients.map((i) => `${i.ingredient.name}:${i.quantity}${i.unit}`).join("; "),
+        ingredients: d.ingredients.map((i) => `${i.ingredient.name} ${i.quantity} ${i.unit}`).join(", "),
         recipe: d.recipe,
       }));
       setDrinks(viewModels);
@@ -46,7 +46,7 @@ export function useDrinks() {
       });
       await fetchAll();
     },
-    [fetchAll]
+    [fetchAll],
   );
 
   const update = useCallback(
@@ -54,7 +54,7 @@ export function useDrinks() {
       await updateDrink(id, { ...values, id });
       await fetchAll();
     },
-    [fetchAll]
+    [fetchAll],
   );
 
   const remove = useCallback(
@@ -62,7 +62,7 @@ export function useDrinks() {
       await deleteDrink(id);
       await fetchAll();
     },
-    [fetchAll]
+    [fetchAll],
   );
 
   useEffect(() => {

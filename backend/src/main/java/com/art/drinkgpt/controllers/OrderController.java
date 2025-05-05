@@ -7,8 +7,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,8 +17,8 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public Page<OrderDTO> getAllOrders(Pageable pageable) {
-        return orderService.getAllOrders(pageable);
+    public Page<OrderDTO> getAllOrders(Pageable pageable, @RequestParam(required = false) Boolean served) {
+        return orderService.getAllOrders(pageable, served);
     }
 
     @PostMapping

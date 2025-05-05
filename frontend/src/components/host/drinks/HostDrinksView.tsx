@@ -75,35 +75,38 @@ const HostDrinksView: React.FC = () => {
   const handlePageChange = (newPagination: Pagination) => setPagination(newPagination);
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-semibold">Zarządzanie drinkami</h1>
-        <div className="flex justify-end mb-4">
-          <Button onClick={handleAddClick} className="btn btn-primary">
-            Dodaj drink
-          </Button>
+    <main className="flex-grow container mx-auto p-4 space-y-8">
+      <div className="p-4">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-semibold">Zarządzanie drinkami</h1>
+          <div className="flex justify-end mb-4">
+            <Button onClick={handleAddClick} className="btn btn-primary">
+              Dodaj drink
+            </Button>
+          </div>
         </div>
+        {isLoading && <p>Loading...</p>}
+        {error && <p className="text-red-600">{error}</p>}
+        {!isLoading && !error && <DrinkList drinks={drinks} onEdit={handleEditClick} onDelete={handleDeleteClick} />}
+
+        <DrinkFormModal
+          isOpen={isFormModalOpen}
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          onClose={() => setFormModalOpen(false)}
+        />
+
+        <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={isLoading} />
+
+        <ConfirmDialog
+          isOpen={isConfirmOpen}
+          message={`Are you sure you want to delete ${drinkToDelete?.name}?`}
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setConfirmOpen(false)}
+        />
       </div>
-      {isLoading && <p>Loading...</p>}
-      {error && <p className="text-red-600">{error}</p>}
-      {!isLoading && !error && <DrinkList drinks={drinks} onEdit={handleEditClick} onDelete={handleDeleteClick} />}
+    </main>
 
-      <DrinkFormModal
-        isOpen={isFormModalOpen}
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        onClose={() => setFormModalOpen(false)}
-      />
-
-      <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={isLoading} />
-
-      <ConfirmDialog
-        isOpen={isConfirmOpen}
-        message={`Are you sure you want to delete ${drinkToDelete?.name}?`}
-        onConfirm={handleConfirmDelete}
-        onCancel={() => setConfirmOpen(false)}
-      />
-    </div>
   );
 };
 
