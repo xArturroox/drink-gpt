@@ -15,7 +15,7 @@ const IngredientItem: React.FC<IngredientItemProps> = ({ item, onEdit, onDelete 
       <input type="checkbox" checked={item.available} disabled />
     </td>
     <td className="border px-4 py-2">
-      <div className="flex justify-end space-x-2">
+      <div className="flex flex-col space-y-2">
         <Button
           size="sm"
           variant="outline"
