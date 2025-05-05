@@ -106,7 +106,6 @@ const HostDrinksView: React.FC = () => {
         />
       </div>
     </main>
-
   );
 };
 

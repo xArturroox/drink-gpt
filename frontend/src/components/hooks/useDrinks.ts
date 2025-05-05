@@ -46,7 +46,7 @@ export function useDrinks() {
       });
       await fetchAll();
     },
-    [fetchAll],
+    [fetchAll]
   );
 
   const update = useCallback(
@@ -54,7 +54,7 @@ export function useDrinks() {
       await updateDrink(id, { ...values, id });
       await fetchAll();
     },
-    [fetchAll],
+    [fetchAll]
   );
 
   const remove = useCallback(
@@ -62,7 +62,7 @@ export function useDrinks() {
       await deleteDrink(id);
       await fetchAll();
     },
-    [fetchAll],
+    [fetchAll]
   );
 
   useEffect(() => {

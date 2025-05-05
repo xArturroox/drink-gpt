@@ -33,7 +33,8 @@ const AISuggestionPanel: React.FC<AISuggestionPanelProps> = ({ onSubmit, isLoadi
   return (
     <div
       className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-lg p-5 border border-white/20 dark:border-gray-700/30"
-      data-testid="ai-suggestion-panel">
+      data-testid="ai-suggestion-panel"
+    >
       <PreferenceInput
         value={preferences}
         placeholder="Podaj swoje preferencje"

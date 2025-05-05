@@ -26,7 +26,7 @@ const IngredientSelector: React.FC<IngredientSelectorProps> = ({ fields, append,
       <legend className="block mb-1 font-medium">Składniki</legend>
       {fields.map((field, index) => {
         const ingredientId = watch(`ingredients.${index}.id`);
-        
+
         return (
           <div key={field.id} className="flex space-x-2 items-center mb-2">
             <select

@@ -74,7 +74,8 @@ const HomePage: React.FC = () => {
         <main className="flex-grow container mx-auto p-4 space-y-8">
           <div
             className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-lg p-6 mb-6 border border-white/20 dark:border-gray-700/30"
-            data-testid="guest-instructions">
+            data-testid="guest-instructions"
+          >
             <h2 className="text-xl font-semibold mb-3">Witaj w DrinkGPT!</h2>
             <p className="mb-2">Jako gość możesz:</p>
             <ul className="list-disc ml-5 space-y-1">

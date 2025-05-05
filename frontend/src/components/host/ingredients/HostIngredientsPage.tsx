@@ -103,11 +103,10 @@ const HostIngredientsPage: React.FC = () => {
             onCancel={handleModalCancel}
           />
         )}
-        
+
         <ConfirmationDialog isOpen={isConfirmOpen} onConfirm={handleDeleteConfirm} onCancel={closeConfirm} />
       </div>
     </main>
-
   );
 };
 

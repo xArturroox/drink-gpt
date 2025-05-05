@@ -20,4 +20,4 @@ const Logo = ({ className = "" }: { className?: string }) => {
   );
 };
 
-export default Logo; 
+export default Logo;

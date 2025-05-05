@@ -3,13 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "./hooks/useAuth";
 import Logo from "./Logo";
 import { Menu } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 const TopBar = () => {
   const { isAuthenticated, handleLogin, handleLogout } = useAuth();
@@ -45,7 +39,7 @@ const TopBar = () => {
             <Logo className="w-6 h-6" />
             <h1 className="text-xl font-bold text-gray-900 dark:text-white">DrinkGPT</h1>
           </a>
-          
+
           {/* Desktop Navigation */}
           {isAuthenticated && (
             <div className="hidden md:block">

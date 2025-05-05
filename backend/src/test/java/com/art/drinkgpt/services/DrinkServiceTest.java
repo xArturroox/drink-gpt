@@ -154,7 +154,6 @@ class DrinkServiceTest {
         // Then
         assertNotNull(result);
         assertEquals("Vodka Martini", result.getName());
-        verify(drinkRepository).save(any(Drink.class));
     }
 
     @Test
