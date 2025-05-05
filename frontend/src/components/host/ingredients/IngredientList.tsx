@@ -19,7 +19,7 @@ const IngredientList: React.FC<IngredientListProps> = ({ items, onEdit, onDelete
         <tr>
           <th className="border px-4 py-2 text-left">Nazwa</th>
           <th className="border px-4 py-2 text-left">Dostępny</th>
-          <th className="border px-4 py-2 text-right">Akcje</th>
+          <th className="border px-4 py-2 text-left">Akcje</th>
         </tr>
       </thead>
       <tbody>

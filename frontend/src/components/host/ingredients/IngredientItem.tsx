@@ -15,16 +15,16 @@ const IngredientItem: React.FC<IngredientItemProps> = ({ item, onEdit, onDelete 
       <input type="checkbox" checked={item.available} disabled />
     </td>
     <td className="border px-4 py-2">
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col items-center space-y-2">
         <Button
           size="sm"
           variant="outline"
           onClick={() => onEdit(item)}
-          className="bg-blue-400 hover:bg-blue-500 text-black"
+          className="bg-blue-400 hover:bg-blue-500 text-black w-20"
         >
           Edytuj
         </Button>
-        <Button size="sm" variant="destructive" onClick={() => onDelete(item.id)}>
+        <Button size="sm" variant="destructive" onClick={() => onDelete(item.id)} className="w-20">
           Usuń
         </Button>
       </div>
