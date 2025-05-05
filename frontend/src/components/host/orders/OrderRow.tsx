@@ -21,7 +21,12 @@ const OrderRow: React.FC<OrderRowProps> = ({ index, order, onServe, onDelete, lo
       <td className="px-4 py-2">{order.orderTimestamp}</td>
       <td className="px-4 py-2 flex flex-col gap-2">
         {!order.served && (
-          <Button size="sm" variant="outline" onClick={() => onServe(order.id)} disabled={loading}>
+          <Button 
+            size="sm" 
+            className="bg-green-600 hover:bg-green-700 text-white" 
+            onClick={() => onServe(order.id)} 
+            disabled={loading}
+          >
             Obsłużone
           </Button>
         )}

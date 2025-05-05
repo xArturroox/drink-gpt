@@ -92,7 +92,10 @@ const HostIngredientsPage: React.FC = () => {
           </div>
         )}
 
-        <IngredientList items={ingredients} onEdit={handleEditClick} onDelete={handleDeleteClick} />
+        <div className="bg-white">
+          <IngredientList items={ingredients} onEdit={handleEditClick} onDelete={handleDeleteClick} />
+        </div>
+        <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={loading} />
         {isModalOpen && (
           <IngredientModalForm
             initialValues={editingItem ? { name: editingItem.name, available: editingItem.available } : undefined}
@@ -100,7 +103,7 @@ const HostIngredientsPage: React.FC = () => {
             onCancel={handleModalCancel}
           />
         )}
-        <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={loading} />
+        
         <ConfirmationDialog isOpen={isConfirmOpen} onConfirm={handleDeleteConfirm} onCancel={closeConfirm} />
       </div>
     </main>

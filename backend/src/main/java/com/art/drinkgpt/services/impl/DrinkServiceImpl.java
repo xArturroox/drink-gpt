@@ -5,6 +5,7 @@ import com.art.drinkgpt.models.dto.DrinkIngredientDTO;
 import com.art.drinkgpt.models.dto.IngredientDTO;
 import com.art.drinkgpt.models.entities.Drink;
 import com.art.drinkgpt.models.entities.DrinkIngredient;
+import com.art.drinkgpt.models.entities.DrinkIngredientId;
 import com.art.drinkgpt.models.entities.Ingredient;
 import com.art.drinkgpt.repositories.DrinkRepository;
 import com.art.drinkgpt.repositories.IngredientRepository;
@@ -32,7 +33,7 @@ public class DrinkServiceImpl implements DrinkService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<DrinkDTO> getAllDrinks(Pageable pageable, Long ingredientId) {
+    public Page<DrinkDTO> getAllDrinks(Pageable pageable, Integer ingredientId) {
         Page<Drink> drinks = ingredientId != null
                 ? drinkRepository.findByIngredientId(ingredientId, pageable)
                 : drinkRepository.findAll(pageable);
@@ -41,7 +42,7 @@ public class DrinkServiceImpl implements DrinkService {
 
     @Override
     @Transactional(readOnly = true)
-    public DrinkDTO getDrinkById(Long id) {
+    public DrinkDTO getDrinkById(Integer id) {
         return drinkRepository.findById(id)
                 .map(this::mapToDTO)
                 .orElseThrow(() -> new EntityNotFoundException("Drink not found with id: " + id));
@@ -51,13 +52,18 @@ public class DrinkServiceImpl implements DrinkService {
     @Transactional
     public DrinkDTO createDrink(DrinkDTO request) {
         Drink drink = new Drink();
+        drink.setName(request.getName());
+        drink.setRecipe(request.getRecipe());
+        drink = drinkRepository.save(drink);
+
         updateDrinkFromRequest(drink, request);
-        return mapToDTO(drinkRepository.save(drink));
+        drink = drinkRepository.save(drink);
+        return mapToDTO(drink);
     }
 
     @Override
     @Transactional
-    public DrinkDTO updateDrink(Long id, DrinkDTO request) {;
+    public DrinkDTO updateDrink(Integer id, DrinkDTO request) {
         Drink drink = drinkRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Drink not found with id: " + id));
         updateDrinkFromRequest(drink, request);
@@ -66,7 +72,7 @@ public class DrinkServiceImpl implements DrinkService {
 
     @Override
     @Transactional
-    public void deleteDrink(Long id) {
+    public void deleteDrink(Integer id) {
         log.debug("Deleting drink with id: {}", id);
         if (!drinkRepository.existsById(id)) {
             throw new EntityNotFoundException("Drink not found with id: " + id);
@@ -85,9 +91,12 @@ public class DrinkServiceImpl implements DrinkService {
                     .orElseThrow(() -> new EntityNotFoundException("Ingredient not found with id: " + ingredientDTO.getIngredient().getId()));
             
             DrinkIngredient drinkIngredient = new DrinkIngredient();
+            DrinkIngredientId id = new DrinkIngredientId(drink.getId(), ingredient.getId());
+            drinkIngredient.setId(id);
             drinkIngredient.setDrink(drink);
             drinkIngredient.setIngredient(ingredient);
             drinkIngredient.setQuantity(ingredientDTO.getQuantity());
+            drinkIngredient.setUnit(ingredientDTO.getUnit());
             drinkIngredients.add(drinkIngredient);
         }
         

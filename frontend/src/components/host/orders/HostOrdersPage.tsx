@@ -54,14 +54,17 @@ const HostOrdersPage: React.FC = () => {
             <span>Ładowanie zamówień...</span>
           </output>
         )}
-        <h1 className="text-2xl font-semibold mb-4">Kolejka Zamówień</h1>
+
         <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-semibold mb-4">Kolejka Zamówień</h1>
           <FilterSortControls filters={filters} onChange={handleFilterChange} disabled={loading} />
-          <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={loading} />
         </div>
-        {error && <div className="text-destructive mb-4">{error.message}</div>}
-        <OrderTable orders={orders} loading={loading} onServe={serveOrder} onDelete={open} />
+        <div className="bg-white">
+          {error && <div className="text-destructive mb-4">{error.message}</div>}
+          <OrderTable orders={orders} loading={loading} onServe={serveOrder} onDelete={open} />
+        </div>
         <ConfirmationDialog isOpen={isOpen} onConfirm={handleDeleteConfirm} onCancel={close} />
+        <PaginationControls pagination={pagination} onChange={handlePageChange} disabled={loading} />
       </div>
     </main>
   );

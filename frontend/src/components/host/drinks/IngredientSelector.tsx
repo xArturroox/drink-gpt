@@ -16,14 +16,14 @@ const IngredientSelector: React.FC<IngredientSelectorProps> = ({ fields, append,
 
   return (
     <fieldset className="mb-4">
-      <legend className="block mb-1 font-medium">Ingredients</legend>
+      <legend className="block mb-1 font-medium">Składniki</legend>
       {fields.map((field, index) => (
         <div key={field.id} className="flex space-x-2 items-center mb-2">
           <select
             className="border rounded px-2 py-1"
-            {...register(`ingredients.${index}.id`, { required: "Ingredient is required" })}
+            {...register(`ingredients.${index}.id`, { required: "Składnik jest wymagany" })}
           >
-            <option value="">Select ingredient</option>
+            <option value="">Wybierz składnik</option>
             {ingredients.map((ing) => (
               <option key={ing.id} value={ing.id}>
                 {ing.name}
@@ -33,17 +33,17 @@ const IngredientSelector: React.FC<IngredientSelectorProps> = ({ fields, append,
           <input
             type="number"
             className="w-16 border rounded px-2 py-1"
-            placeholder="Qty"
+            placeholder="Ilość"
             {...register(`ingredients.${index}.quantity`, {
-              required: "Quantity is required",
-              min: { value: 1, message: "Must be > 0" },
+              required: "Ilość jest wymagana",
+              min: { value: 1, message: "Musi być > 0" },
             })}
           />
           <input
             type="text"
             className="w-16 border rounded px-2 py-1"
-            placeholder="Unit"
-            {...register(`ingredients.${index}.unit`, { required: "Unit is required" })}
+            placeholder="Jedn."
+            {...register(`ingredients.${index}.unit`, { required: "Jednostka jest wymagana" })}
           />
           <button type="button" className="text-red-600" onClick={() => remove(index)}>
             &times;
@@ -51,12 +51,12 @@ const IngredientSelector: React.FC<IngredientSelectorProps> = ({ fields, append,
         </div>
       ))}
       <button type="button" className="mt-2 text-blue-600" onClick={() => append({ id: 0, quantity: 1, unit: "" })}>
-        Add Ingredient
+        Dodaj składnik
       </button>
       <p className="text-red-600 mt-1">
         {errors.ingredients && "message" in errors.ingredients
           ? errors.ingredients.message
-          : "Select at least one ingredient"}
+          : "Wybierz przynajmniej jeden składnik"}
       </p>
     </fieldset>
   );

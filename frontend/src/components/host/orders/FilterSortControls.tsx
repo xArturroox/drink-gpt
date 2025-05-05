@@ -15,7 +15,7 @@ const FilterSortControls: React.FC<FilterSortControlsProps> = ({ filters, onChan
   return (
     <div className="flex items-center gap-4 mb-4">
       <select
-        className="border p-2 rounded"
+        className="w-full border border-gray-200 p-2 rounded-md bg-white hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
         value={filters.status ?? ""}
         onChange={handleStatusChange}
         disabled={disabled}

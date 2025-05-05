@@ -85,7 +85,7 @@ const HostDrinksView: React.FC = () => {
             </Button>
           </div>
         </div>
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <p>Ładowanie...</p>}
         {error && <p className="text-red-600">{error}</p>}
         {!isLoading && !error && <DrinkList drinks={drinks} onEdit={handleEditClick} onDelete={handleDeleteClick} />}
 
@@ -100,7 +100,7 @@ const HostDrinksView: React.FC = () => {
 
         <ConfirmDialog
           isOpen={isConfirmOpen}
-          message={`Are you sure you want to delete ${drinkToDelete?.name}?`}
+          message={`Czy na pewno chcesz usunąć drink ${drinkToDelete?.name}?`}
           onConfirm={handleConfirmDelete}
           onCancel={() => setConfirmOpen(false)}
         />

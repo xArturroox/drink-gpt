@@ -19,12 +19,12 @@ public class DrinkController {
 
     @GetMapping
     public Page<DrinkDTO> getAllDrinks(Pageable pageable,
-                                                       @RequestParam(required = false) Long ingredientId) {
+                                     @RequestParam(required = false) Integer ingredientId) {
         return drinkService.getAllDrinks(pageable, ingredientId);
     }
 
     @GetMapping("/{id}")
-    public DrinkDTO getDrinkById(@PathVariable Long id) {
+    public DrinkDTO getDrinkById(@PathVariable Integer id) {
         return drinkService.getDrinkById(id);
     }
 
@@ -34,13 +34,13 @@ public class DrinkController {
     }
 
     @PutMapping("/{id}")
-    public DrinkDTO updateDrink(@PathVariable Long id,
-                                                @Valid @RequestBody DrinkDTO request) {
+    public DrinkDTO updateDrink(@PathVariable Integer id,
+                               @Valid @RequestBody DrinkDTO request) {
         return drinkService.updateDrink(id, request);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDrink(@PathVariable Long id) {
+    public void deleteDrink(@PathVariable Integer id) {
         drinkService.deleteDrink(id);
     }
 } 

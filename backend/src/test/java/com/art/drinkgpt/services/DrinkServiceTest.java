@@ -108,24 +108,24 @@ class DrinkServiceTest {
     void getAllDrinks_WithIngredientFilter_ShouldFilterByIngredient() {
         // Given
         Page<Drink> drinkPage = new PageImpl<>(List.of(drink));
-        when(drinkRepository.findByIngredientId(1L, pageable)).thenReturn(drinkPage);
+        when(drinkRepository.findByIngredientId(1, pageable)).thenReturn(drinkPage);
 
         // When
-        Page<DrinkDTO> result = drinkService.getAllDrinks(pageable, 1L);
+        Page<DrinkDTO> result = drinkService.getAllDrinks(pageable, 1);
 
         // Then
         assertNotNull(result);
         assertEquals(1, result.getTotalElements());
-        verify(drinkRepository).findByIngredientId(1L, pageable);
+        verify(drinkRepository).findByIngredientId(1, pageable);
     }
 
     @Test
     void getDrinkById_WhenExists_ShouldReturnDrinkDTO() {
         // Given
-        when(drinkRepository.findById(1L)).thenReturn(Optional.of(drink));
+        when(drinkRepository.findById(1)).thenReturn(Optional.of(drink));
 
         // When
-        DrinkDTO result = drinkService.getDrinkById(1L);
+        DrinkDTO result = drinkService.getDrinkById(1);
 
         // Then
         assertNotNull(result);
@@ -136,10 +136,10 @@ class DrinkServiceTest {
     @Test
     void getDrinkById_WhenNotExists_ShouldThrowEntityNotFoundException() {
         // Given
-        when(drinkRepository.findById(1L)).thenReturn(Optional.empty());
+        when(drinkRepository.findById(1)).thenReturn(Optional.empty());
 
         // When/Then
-        assertThrows(EntityNotFoundException.class, () -> drinkService.getDrinkById(1L));
+        assertThrows(EntityNotFoundException.class, () -> drinkService.getDrinkById(1));
     }
 
     @Test
@@ -160,7 +160,7 @@ class DrinkServiceTest {
     @Test
     void updateDrink_WhenExists_ShouldReturnUpdatedDrinkDTO() {
         // Given
-        when(drinkRepository.findById(1L)).thenReturn(Optional.of(drink));
+        when(drinkRepository.findById(1)).thenReturn(Optional.of(drink));
         when(ingredientRepository.findById(1)).thenReturn(Optional.of(ingredient));
         when(drinkRepository.save(any(Drink.class))).thenReturn(drink);
 
@@ -169,43 +169,43 @@ class DrinkServiceTest {
         drinkDTO.setRecipe("Stir gently with ice and strain into a chilled glass");
 
         // When
-        DrinkDTO result = drinkService.updateDrink(1L, drinkDTO);
+        DrinkDTO result = drinkService.updateDrink(1, drinkDTO);
 
         // Then
         assertNotNull(result);
-        verify(drinkRepository).findById(1L);
+        verify(drinkRepository).findById(1);
         verify(drinkRepository).save(any(Drink.class));
     }
 
     @Test
     void updateDrink_WhenNotExists_ShouldThrowEntityNotFoundException() {
         // Given
-        when(drinkRepository.findById(1L)).thenReturn(Optional.empty());
+        when(drinkRepository.findById(1)).thenReturn(Optional.empty());
 
         // When/Then
-        assertThrows(EntityNotFoundException.class, () -> drinkService.updateDrink(1L, drinkDTO));
+        assertThrows(EntityNotFoundException.class, () -> drinkService.updateDrink(1, drinkDTO));
     }
 
     @Test
     void deleteDrink_WhenExists_ShouldDeleteSuccessfully() {
         // Given
-        when(drinkRepository.existsById(1L)).thenReturn(true);
-        doNothing().when(drinkRepository).deleteById(1L);
+        when(drinkRepository.existsById(1)).thenReturn(true);
+        doNothing().when(drinkRepository).deleteById(1);
 
         // When
-        drinkService.deleteDrink(1L);
+        drinkService.deleteDrink(1);
 
         // Then
-        verify(drinkRepository).existsById(1L);
-        verify(drinkRepository).deleteById(1L);
+        verify(drinkRepository).existsById(1);
+        verify(drinkRepository).deleteById(1);
     }
 
     @Test
     void deleteDrink_WhenNotExists_ShouldThrowEntityNotFoundException() {
         // Given
-        when(drinkRepository.existsById(1L)).thenReturn(false);
+        when(drinkRepository.existsById(1)).thenReturn(false);
 
         // When/Then
-        assertThrows(EntityNotFoundException.class, () -> drinkService.deleteDrink(1L));
+        assertThrows(EntityNotFoundException.class, () -> drinkService.deleteDrink(1));
     }
 } 

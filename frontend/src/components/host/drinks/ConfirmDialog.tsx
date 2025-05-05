@@ -35,10 +35,10 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({ isOpen, message, onConfir
         <p className="mb-4">{message}</p>
         <div className="flex justify-end space-x-2">
           <Button variant="outline" onClick={onCancel}>
-            Cancel
+            Anuluj
           </Button>
           <Button variant="destructive" onClick={onConfirm}>
-            Delete
+            Usuń
           </Button>
         </div>
       </div>
