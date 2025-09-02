@@ -6,6 +6,7 @@
     <groupId>com.art</groupId>
     <artifactId>drink-gpt-frontend</artifactId>
     <version>1.0.0</version>
+    <name>Drink GPT - Frontend</name>
     <packaging>pom</packaging>
 
     <build>
