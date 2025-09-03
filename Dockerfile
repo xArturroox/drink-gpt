@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:24-jre-alpine
 
 # Copy the pre-built application JAR from the build context
 # Assumes the JAR is located in backend/target/

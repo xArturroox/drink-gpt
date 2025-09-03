@@ -30,8 +30,8 @@ DrinkGPT is a minimal viable product (MVP) designed to streamline the process of
 - Shadcn/ui
 
 **Backend:**
-- Java 21
-- Spring Boot 3.4.4
+- Java 24
+- Spring Boot 3.5.5
 - Flyway for database migrations
 - H2 Database
 - Spring Security
@@ -55,7 +55,7 @@ DrinkGPT is a minimal viable product (MVP) designed to streamline the process of
 ### Prerequisites
 - **Node.js:** Version specified in the `.nvmrc` file (v22.14.0 recommended)
 - **Maven:** For managing and building the backend (ensure Maven is installed)
-- **Java:** Java 21 or later
+- **Java:** Java 24 or later
 
 ### Setup Instructions
 
