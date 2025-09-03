@@ -17,7 +17,7 @@ Frontend:
 - Shadcn/ui
 
 Backend:
-- Java 21
+- Java 24
 - SpringBoot 3.4.4
 - Flyway
 - H2 Database

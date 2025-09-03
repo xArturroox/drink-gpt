@@ -6,7 +6,7 @@ Frontend - Astro z React dla komponentów interaktywnych:
 - Shadcn/ui zapewnia bibliotekę dostępnych komponentów React, na których oprzemy UI
 
 Backend - Spring Boot kompleksowe rozwiązanie backendowe:
-- Java 21
+- Java 24
 - Zostanie wykorzystana baza H2
 - Komunikacja z modelami AI zostanie zaimplementowana przez Spring AI
 - Posiada wbudowaną autentykację użytkowników
