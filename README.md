@@ -1,8 +1,5 @@
 # DrinkGPT
 
-Preview: https://drinkgpt-p8nsk.ondigitalocean.app/
-Host: admin1 admin1
-
 ## Table of Contents
 1. [Project Name](#project-name)
 2. [Project Description](#project-description)
